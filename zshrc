@@ -30,11 +30,12 @@ WHITE=$(tput setaf 15)
 # Variables de entorno generales
 # #####################################################################################
 # export PS1="%n@%m␣%1d ⌦ "
-export PS1="⌦ "
+#export PS1="⌦ "
 export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
 export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
 export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # #####################################################################################
 # Configuración de rutas de directorios para busqueda de binarios
@@ -91,4 +92,12 @@ alias gs='git status'
 
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+# source <(ng completion script)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# GitHub
+ssh-add ~/.ssh/github
+

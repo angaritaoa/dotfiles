@@ -5,6 +5,12 @@ brew:
 	xcode-select --install
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+.PHONY: dotfiles
+dotfiles:
+	ln -fns ${PWD}/zshrc ~/.zshrc
+	ln -fns ${PWD}/gitconfig ~/.gitconfig
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+
 .PHONY: macos
 macos:
 	brew update
@@ -13,15 +19,12 @@ macos:
 		gnu-tar direnv libtool git-delta universal-ctags shellcheck aspell languagetool \
 		clang-format google-java-format pandoc
 
-.PHONY: dotfiles
-dotfiles:
-	ln -fns ${PWD}/zshrc ~/.zshrc
-	ln -fns ${PWD}/gitconfig ~/.gitconfig
 
 .PHONY: emacs
 emacs:
-	brew tap d12frosted/emacs-plus
-	brew install emacs-plus --with-native-comp
+#	brew tap d12frosted/emacs-plus
+#	brew install emacs-plus --with-native-comp
+#	brew install emacs-plus
 	rm -rf ~/.emacs.d
 	ln -fns ${PWD}/doom.d ~/.doom.d
 	git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d

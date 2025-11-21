@@ -29,9 +29,12 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light)
-      doom-symbol-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light))
+;;(setq doom-font (font-spec :family "JetBrains Mono" :size 13)
+;;      doom-big-font (font-spec :family "JetBrains Mono" :size 13)
+;;      doom-symbol-font (font-spec :family "JetBrains Mono" :size 13))
+(setq doom-font (font-spec :family "SF Mono" :size 12)
+      doom-big-font (font-spec :family "SF Mono" :size 12)
+      doom-symbol-font (font-spec :family "SF Mono" :size 12))
 
 ;;(setq-default line-spacing 0.3)
 ;;(setq-default line-height 0.3)
@@ -42,7 +45,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;;(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one-light)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -85,11 +89,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(blink-cursor-mode 1)
+;;(blink-cursor-mode 1)
 
-(setq evil-normal-state-cursor '(hollow "#51afef")
-      evil-insert-state-cursor '(bar    "#51afef")
-      evil-visual-state-cursor '(hollow "#51afef"))
+;;(setq evil-normal-state-cursor '(hollow "#51afef")
+;;      evil-insert-state-cursor '(bar    "#51afef")
+;;      evil-visual-state-cursor '(hollow "#51afef"))
 
 (map! :leader
       :desc "Toggle cursor here" :nv "i c" #'+multiple-cursors/evil-mc-toggle-cursor-here
@@ -153,3 +157,8 @@
 (setq lsp-dart-sdk-dir "~/.flutter/bin/cache/dart-sdk")
 (setq lsp-dart-flutter-sdk "~/.flutter")
 (setq flutter-sdk-path "~/.flutter")
+
+(setq-default indent-tabs-mode nil) ; Asegura que se usen espacios en lugar de tabuladores
+(setq-default tab-width 2)          ; Establece el ancho del tabulador visual a 2 espacios
+(setq-default indent-line-function #'indent-to-column) ; Usa espacios para la indentación
+(setq-default standard-indent 2)    ; Establece el incremento de indentación estándar a 2 espacios
