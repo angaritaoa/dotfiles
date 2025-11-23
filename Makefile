@@ -11,12 +11,12 @@ debian:
 		vlc-plugin-pipewire pipewire-audio pipewire-jack pipewire-libcamera flameshot piper \
 		pavucontrol-qt qt6-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes vim
 #	sudo cp -f ${PWD}/10-xorg.conf /etc/X11/xorg.conf.d
-#	sudo cp -f ${PWD}/environment /etc
+	sudo cp -f ${PWD}/environment /etc
 	sudo cp -f ${PWD}/local.conf /etc/fonts
 #	sudo cp -f ${PWD}/Xresources /etc/X11/Xresources
 	sudo cp -f ${PWD}/apt.conf /etc/apt
-#	sudo cp -fR ./assets/fonts/JetBrainsMono /usr/share/fonts
-#	sudo cp -fR ./assets/fonts/JetBrainsMonoNerd /usr/share/fonts
+	sudo cp -fR ./assets/fonts/JetBrainsMono /usr/share/fonts
+	sudo cp -fR ./assets/fonts/JetBrainsMonoNerd /usr/share/fonts
 	sudo cp -fR ./assets/fonts/SF-Pro-Display /usr/share/fonts
 	sudo cp -fR ./assets/fonts/Windows /usr/share/fonts
 	sudo fc-cache -r
