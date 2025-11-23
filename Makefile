@@ -1,33 +1,54 @@
 PWD=$(shell pwd)
 
-.PHONY: brew
-brew:
-	xcode-select --install
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+.PHONY: debian
+debian:
+	sudo apt install aptitude
+	sudo aptitude update
+	sudo aptitude upgrade
+	sudo aptitude install linux-image-amd64 linux-headers-amd64
+	sudo aptitude install mesa-utils pipewire-v4l2 v4l2loopback-dkms v4l2loopback-utils curl wget \
+		git git-lfs tree p7zip-full xz-utils zip unzip gzip bzip2 bzip3 7zip lzma vlc \
+		vlc-plugin-pipewire pipewire-audio pipewire-jack pipewire-libcamera flameshot piper \
+		pavucontrol-qt qt6-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes vim
+#	sudo cp -f ${PWD}/10-xorg.conf /etc/X11/xorg.conf.d
+#	sudo cp -f ${PWD}/environment /etc
+	sudo cp -f ${PWD}/local.conf /etc/fonts
+#	sudo cp -f ${PWD}/Xresources /etc/X11/Xresources
+	sudo cp -f ${PWD}/apt.conf /etc/apt
+#	sudo cp -fR ./assets/fonts/JetBrainsMono /usr/share/fonts
+#	sudo cp -fR ./assets/fonts/JetBrainsMonoNerd /usr/share/fonts
+	sudo cp -fR ./assets/fonts/SF-Pro-Display /usr/share/fonts
+	sudo cp -fR ./assets/fonts/Windows /usr/share/fonts
+	sudo fc-cache -r
+#	sudo update-grub
+#	sudo reboot
 
 .PHONY: dotfiles
 dotfiles:
-	ln -fns ${PWD}/zshrc ~/.zshrc
+	ln -fns ${PWD}/config/flameshot ~/.config/flameshot
+#	ln -fns ${PWD}/bashrc ~/.bashrc
 	ln -fns ${PWD}/gitconfig ~/.gitconfig
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+	ln -fns ${PWD}/../.ssh ~/.ssh
 
-.PHONY: macos
-macos:
-	brew update
-	brew upgrade
-	brew install tree p7zip xz gzip exa ripgrep grep exa zstd fd sqlite hub gpg2 coreutils \
-		gnu-tar direnv libtool git-delta universal-ctags shellcheck aspell languagetool \
-		clang-format google-java-format pandoc
-
+.PHONY: themes
+themes:
+#	cd ~/Descargas; ssh-add ~/.ssh/id_ed25519
+	cd ~/Descargas;
+	git clone git@github.com:vinceliuice/Layan-kde.git
+	git clone git@github.com:vinceliuice/Layan-gtk-theme.git
+	git clone git@github.com:vinceliuice/Tela-icon-theme.git
+	Layan-kde/install.sh
+	Layan-gtk-theme/install.sh
+	Tela-icon-theme/install.sh
+	rm -rf Layan-kde Layan-gtk-theme Tela-icon-theme
 
 .PHONY: emacs
 emacs:
-#	brew tap d12frosted/emacs-plus
-#	brew install emacs-plus --with-native-comp
-#	brew install emacs-plus
-	rm -rf ~/.emacs.d
+	sudo aptitude install ripgrep fd-find shellcheck tidy sqlite3 libtool libtool-bin cmake gcc g++ gdb clang \
+		clang-format clang-tidy clang-tools clangd make manpages-dev glslang-tools emacs
+	rm -rf ~/.emacs.d;
 	ln -fns ${PWD}/doom.d ~/.doom.d
-	git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+	git clone https://github.com/doomemacs/doomemacs ~/.emacs.d
 	~/.emacs.d/bin/doom install
 	~/.emacs.d/bin/doom sync
 	~/.emacs.d/bin/doom doctor
