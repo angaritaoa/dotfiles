@@ -10,30 +10,25 @@ debian:
 		git git-lfs tree p7zip-full xz-utils zip unzip gzip bzip2 bzip3 7zip lzma vlc \
 		vlc-plugin-pipewire pipewire-audio pipewire-jack pipewire-libcamera flameshot piper \
 		pavucontrol-qt qt6-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes vim
-#	sudo cp -f ${PWD}/10-xorg.conf /etc/X11/xorg.conf.d
 	sudo cp -f ${PWD}/environment /etc
 	sudo cp -f ${PWD}/local.conf /etc/fonts
-#	sudo cp -f ${PWD}/Xresources /etc/X11/Xresources
 	sudo cp -f ${PWD}/apt.conf /etc/apt
 	sudo cp -fR ./assets/fonts/JetBrainsMono /usr/share/fonts
 	sudo cp -fR ./assets/fonts/JetBrainsMonoNerd /usr/share/fonts
 	sudo cp -fR ./assets/fonts/SF-Pro-Display /usr/share/fonts
 	sudo cp -fR ./assets/fonts/Windows /usr/share/fonts
 	sudo fc-cache -r
-#	sudo update-grub
-#	sudo reboot
+	sudo reboot
 
 .PHONY: dotfiles
 dotfiles:
 	ln -fns ${PWD}/config/flameshot ~/.config/flameshot
-#	ln -fns ${PWD}/bashrc ~/.bashrc
+	ln -fns ${PWD}/bashrc ~/.bashrc
 	ln -fns ${PWD}/gitconfig ~/.gitconfig
-	ln -fns ${PWD}/../.ssh ~/.ssh
 
 .PHONY: themes
 themes:
-#	cd ~/Descargas; ssh-add ~/.ssh/id_ed25519
-	cd ~/Descargas;
+	cd ~/Descargas; ssh-add ~/.ssh/github
 	git clone git@github.com:vinceliuice/Layan-kde.git
 	git clone git@github.com:vinceliuice/Layan-gtk-theme.git
 	git clone git@github.com:vinceliuice/Tela-icon-theme.git
