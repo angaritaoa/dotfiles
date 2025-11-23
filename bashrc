@@ -84,10 +84,10 @@ alias src='source ~/.bashrc'
 #   alias lt='exa -lT  --sort=name     --time-style=long-iso --color=always --group-directories-first'
 #fi
 
-alias lm='gls -ltrh  --color=always --time-style=long-iso --group-directories-first'
-alias lc='gls -ltrh  --color=always --time-style=long-iso --group-directories-first --time=creation'
-alias ls='gls -lSrh  --color=always --time-style=long-iso --group-directories-first'
-alias la='gls -ltrha --color=always --time-style=long-iso --group-directories-first'
+alias lm='ls -ltrh  --color=always --time-style=long-iso --group-directories-first'
+alias lc='ls -ltrh  --color=always --time-style=long-iso --group-directories-first --time=creation'
+alias ls='ls -lSrh  --color=always --time-style=long-iso --group-directories-first'
+alias la='ls -ltrha --color=always --time-style=long-iso --group-directories-first'
 alias lt='tree --dirsfirst'
 
 # #####################################################################################
