@@ -17,6 +17,7 @@ debian:
 	sudo cp -fR ./assets/fonts/JetBrainsMonoNerd /usr/share/fonts
 	sudo cp -fR ./assets/fonts/SF-Pro-Display /usr/share/fonts
 	sudo cp -fR ./assets/fonts/Roboto /usr/share/fonts
+	sudo cp -fR ./assets/fonts/RobotoMono /usr/share/fonts
 	sudo cp -fR ./assets/fonts/Windows /usr/share/fonts
 	sudo fc-cache -r
 	sudo reboot
