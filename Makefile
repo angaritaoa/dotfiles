@@ -10,9 +10,13 @@ debian:
 		git git-lfs tree p7zip-full xz-utils zip unzip gzip bzip2 bzip3 7zip lzma vlc \
 		vlc-plugin-pipewire pipewire-audio pipewire-jack pipewire-libcamera flameshot piper \
 		pavucontrol-qt qt6-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes vim
+	sudo cp -f ${PWD}/10-xorg.conf /etc/X11/xorg.conf.d
 	sudo cp -f ${PWD}/environment /etc
 	sudo cp -f ${PWD}/local.conf /etc/fonts
+	sudo cp -f ${PWD}/Xresources /etc/X11/Xresources
 	sudo cp -f ${PWD}/apt.conf /etc/apt
+	sudo cp -f ${PWD}/config/sddm/hidpi.conf /etc/sddm.conf.d
+	sudo cp -f ${PWD}/config/sddm/kde_settings.conf /etc/sddm.conf.d
 	sudo cp -fR ./assets/fonts/JetBrainsMono /usr/share/fonts
 	sudo cp -fR ./assets/fonts/JetBrainsMonoNerd /usr/share/fonts
 	sudo cp -fR ./assets/fonts/SF-Pro-Display /usr/share/fonts
@@ -24,7 +28,7 @@ debian:
 
 .PHONY: dotfiles
 dotfiles:
-	ln -fns ${PWD}/config/flameshot ~/.config/flameshot
+#	ln -fns ${PWD}/config/flameshot ~/.config/flameshot
 	ln -fns ${PWD}/bashrc ~/.bashrc
 	ln -fns ${PWD}/gitconfig ~/.gitconfig
 
