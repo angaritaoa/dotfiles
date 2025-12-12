@@ -1,1 +1,1 @@
-Makefile.debian
+Makefile.fedora
