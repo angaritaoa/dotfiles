@@ -9,25 +9,32 @@ fedora:
 	sudo dnf install --assumeyes libva-utils libva-v4l2-request vulkan fedora-workstation-repositories \
 		mesa-libOpenCL curl wget git git-lfs coreutils tree p7zip xz bzip2 lzo lz4 lzma pipewire-v4l2 \
 		v4l2loopback vlc vlc-core bash-completion kernel-tools google-chrome-stable gnome-tweaks vim
+	sudo dnf remove --assumeyes zram-generator zram-generator-defaults
+	sudo grubby --update-kernel=ALL --args="ipv6.disable=1"
+	sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+	sudo depmod -ae
+	sudo reboot
+
+.PHONE: systemd
+systemd:
 	systemctl --user enable --now ssh-agent.socket
 
 .PHONY: dotfiles
 dotfiles:
-	mkdir -p ~/.config/foot
-	sudo ln -fns ${PWD}/local.conf /etc/fonts/local.conf
+	sudo ln -fns ${PWD}/fontconfig/local.conf /etc/fonts/local.conf
 #	ln -fns ${PWD}/config/flameshot ~/.config/flameshot
 	ln -fns ${PWD}/bashrc ~/.bashrc
 	ln -fns ${PWD}/gitconfig ~/.gitconfig
 	ln -fns ${PWD}/profile ~/.profile
-	ln -fns ${PWD}/foot.ini ~/.config/foot/foot.ini
+	mkdir -p ~/.config/foot && ln -fns ${PWD}/foot/foot.ini ~/.config/foot/foot.ini
 
 .PHONY: fonts
 fonts:
-	sudo cp -fR ./assets/fonts/JetBrainsMono /usr/share/fonts
-	sudo cp -fR ./assets/fonts/JetBrainsMonoNerd /usr/share/fonts
-	sudo cp -fR ./assets/fonts/Roboto /usr/share/fonts
-	sudo cp -fR ./assets/fonts/RobotoMono /usr/share/fonts
-	sudo cp -fR ./assets/fonts/Windows /usr/share/fonts
+	sudo cp -fR /mnt/archivos/config/fonts/JetBrainsMono /usr/share/fonts
+	sudo cp -fR /mnt/archivos/config/fonts/JetBrainsMonoNerd /usr/share/fonts
+	sudo cp -fR /mnt/archivos/config/fonts/Roboto /usr/share/fonts
+	sudo cp -fR /mnt/archivos/config/fonts/RobotoMono /usr/share/fonts
+	sudo cp -fR /mnt/archivos/config/fonts/Windows /usr/share/fonts
 	sudo fc-cache -r
 
 .PHONY: emacs
@@ -40,13 +47,6 @@ emacs:
 	~/.emacs.d/bin/doom install
 	~/.emacs.d/bin/doom sync
 	~/.emacs.d/bin/doom doctor
-
-.PHONY: awesome
-awesome:
-	mkdir -p ~/.config
-	ln -fns ${PWD}/config/awesome ~/.config/awesome
-	ln -fns ${PWD}/config/picom ~/.config/picom
-	ln -fns ${PWD}/config/rofi ~/.config/rofi
 
 .PHONY: themes
 themes:
