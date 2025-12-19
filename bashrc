@@ -1,7 +1,7 @@
 # #####################################################################################
 #       __       _______   __        ______
 #      /""\     /"     "| /""\      /    " \
-#     /    \   (: ______)/    \    // ____  \   Copyright (c) 2020-2025 Andres Angarita
+#     /    \   (: ______)/    \    // ____  \   Copyright (c) Andres Angarita
 #    /' /\  \   \/    | /' /\  \  /  /    ) :)  https://github.com/angaritaoa
 #   //  __'  \  // ___)//  __'  \(: (____/ //   Email: angaritaoa@gmail.com
 #  /   /  \\  \(:  (  /   /  \\  \\        /
@@ -34,7 +34,7 @@ WHITE=$(tput setaf 15)
 # #####################################################################################
 # Variables de entorno generales
 # #####################################################################################
-export PS1='⌦ '
+export PS1='● '
 export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
 export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
 
@@ -44,15 +44,6 @@ export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mod
 [ -d ~/.emacs.d/bin ] && export PATH=~/.emacs.d/bin:$PATH
 [ -d ~/.local/bin   ] && export PATH=~/.local/bin:$PATH
 [ -d ~/.flutter/bin ] && export PATH=~/.flutter/bin:$PATH
-
-# #####################################################################################
-# Para acceder al portapapeles del sistema operativo
-# Instalar el paquete: $ sudo dnf install vim-X11
-# #####################################################################################
-if [ -x "$(command -v vimx)" ]; then
-   alias vim='vimx'
-   alias vi='vimx'
-fi
 
 # #####################################################################################
 # Alias generales
@@ -69,14 +60,8 @@ alias free='free -ht'
 alias src='source ~/.bashrc'
 
 # #####################################################################################
-# Cambiando ls por exa. Instalar el paquete: $ sudo dnf install exa
+# Alias para el comando ls
 # #####################################################################################
-#if [[ -x "$(command -v exa)" ]]; then
-#   alias ls='exa -l   --sort=modified --time-style=long-iso --color=always --group-directories-first'
-#   alias ll='exa -l   --sort=size     --time-style=long-iso --color=always --group-directories-first'
-#   alias la='exa -la  --sort=modified --time-style=long-iso --color=always --group-directories-first'
-#   alias lt='exa -lT  --sort=name     --time-style=long-iso --color=always --group-directories-first'
-#fi
 
 alias lm='ls -ltrh  --color=always --time-style=long-iso --group-directories-first'
 alias lc='ls -ltrh  --color=always --time-style=long-iso --group-directories-first --time=creation'
@@ -87,13 +72,14 @@ alias lt='tree --dirsfirst'
 # #####################################################################################
 # Alias para los comandos de git
 # #####################################################################################
-alias ga='git add'
-alias gaa='git add --all'
+alias ga='git add .'
 alias gb='git branch -av'
 alias gc='git commit -m'
 alias gp='git push'
 alias gf='git fetch'
 alias gs='git status'
 
+# #####################################################################################
 # GitHub
+# #####################################################################################
 ssh-add ~/.ssh/github > /dev/null 2>&1
