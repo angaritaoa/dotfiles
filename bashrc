@@ -39,13 +39,6 @@ export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in termina
 export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
 
 # #####################################################################################
-# Configuración de rutas de directorios para busqueda de binarios
-# #####################################################################################
-[ -d ~/.emacs.d/bin ] && export PATH=~/.emacs.d/bin:$PATH
-[ -d ~/.local/bin   ] && export PATH=~/.local/bin:$PATH
-[ -d ~/.flutter/bin ] && export PATH=~/.flutter/bin:$PATH
-
-# #####################################################################################
 # Alias generales
 # #####################################################################################
 alias ..='cd ..'
@@ -70,7 +63,7 @@ alias la='ls -ltrha --color=always --time-style=long-iso --group-directories-fir
 alias lt='tree --dirsfirst'
 
 # #####################################################################################
-# Alias para los comandos de git
+# Alias para el comando git
 # #####################################################################################
 alias ga='git add .'
 alias gb='git branch -av'
@@ -80,6 +73,14 @@ alias gf='git fetch'
 alias gs='git status'
 
 # #####################################################################################
-# GitHub
+# SSH
 # #####################################################################################
-ssh-add ~/.ssh/github > /dev/null 2>&1
+#export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+#ssh-add ~/.ssh/github > /dev/null 2>&1
+
+# #####################################################################################
+# Configuración de rutas de directorios para busqueda de binarios
+# #####################################################################################
+[ -d ~/.emacs.d/bin ] && export PATH=~/.emacs.d/bin:$PATH
+[ -d ~/.local/bin   ] && export PATH=~/.local/bin:$PATH
+[ -d ~/.flutter/bin ] && export PATH=~/.flutter/bin:$PATH
