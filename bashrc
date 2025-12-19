@@ -75,8 +75,8 @@ alias gs='git status'
 # #####################################################################################
 # SSH
 # #####################################################################################
-#export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-#ssh-add ~/.ssh/github > /dev/null 2>&1
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+ssh-add ~/.ssh/github > /dev/null 2>&1
 
 # #####################################################################################
 # Configuración de rutas de directorios para busqueda de binarios

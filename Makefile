@@ -12,29 +12,16 @@ fedora:
 
 .PHONY: systemd
 systemd:
-# /usr/lib/systemd/user
 		systemctl --user enable --now ssh-agent.socket
-		ln -fns ${PWD}/systemd/ssh-add.service ~/.config/systemd/user/ssh-add.service
-		systemctl --user daemon-reload
-		systemctl --user enable --now ssh-add.service
-
-.PHONY: config
-config:
-	mkdir -p ~/.ssh
-	cp -f /mnt/archivos/config/github* ~/.ssh/
-	chmod 700 ~/.ssh
-	chmod 600 ~/.ssh/github
-	chmod 644 ~/.ssh/github.pub
 
 .PHONY: dotfiles
 dotfiles:
-#	mkdir -p ~/.config
 	sudo ln -fns ${PWD}/local.conf /etc/fonts/local.conf
 #	sudo ln -fns ${PWD}/Xresources /etc/X11/Xresources
 #	ln -fns ${PWD}/config/flameshot ~/.config/flameshot
 	ln -fns ${PWD}/bashrc ~/.bashrc
 	ln -fns ${PWD}/gitconfig ~/.gitconfig
-#	ln -fns ${PWD}/../.ssh ~/.ssh
+	ln -fns ${PWD}/profile ~/.profile
 
 .PHONY: fonts
 fonts:
