@@ -1,0 +1,125 @@
+@define-color doom-bg-solid rgba(40, 44, 52, 0.98);
+@define-color doom-bg-bar   rgba(40, 44, 52, 0.50);
+@define-color fg-white      #bbc2cf;
+@define-color doom-blue     #51afef;
+@define-color doom-red      #ff6c6b;
+@define-color doom-green    #98be65;
+@define-color doom-yellow   #ecbe7b;
+@define-color doom-magenta  #c678dd;
+@define-color doom-cyan     #46d9ff;
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Roboto", "JetBrainsMono Nerd Font";
+    /*font-size: 21px;*/
+    font-weight: 500;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @doom-bg-bar; 
+    background-color: transparent; 
+    color: @fg-white;
+    border-radius: 20;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+tooltip {
+    background-color: @doom-bg-solid; 
+    border: 1px solid #3f444a;
+    border-radius: 8px;
+}
+
+tooltip label {
+  color: @fg-white;
+}
+
+#custom-separator {
+    margin: 0 2px;
+}
+
+/*.modules-left, .modules-center, .modules-right {*/
+#workspaces, #taskbar, .modules-center, .modules-right {
+    background-color: @doom-bg-solid;
+    border-radius: 20px;
+    padding: 2px 12px;
+    box-shadow: none;
+    /*border: 2px solid #5b6268;*/
+}
+
+#workspaces, .modules-right {
+    font-size: 24px;
+}
+
+#taskbar.empty {
+    background-color: transparent;
+}
+
+#workspaces button, #taskbar button {
+    border-radius: 20px;
+    padding: 0 12px;
+    margin: 0 1px;
+    background-color: transparent;
+    color: rgba(187, 194, 207, 0.4); 
+    transition: all 0.3s ease;
+    box-shadow: none;
+    border: none;
+}
+
+#workspaces button:hover, #taskbar button:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: @fg-white; 
+}
+
+#workspaces button.active, #taskbar button.active {
+    background-color: transparent; /* Sin fondo */
+    color: @doom-blue; 
+    text-shadow: 0 0 5px rgba(81, 175, 239, 0.4);
+}
+
+#workspaces button.urgent, #taskbar button.urgent {
+    background-color: transparent;
+    color: @doom-red;
+}
+
+#clock {
+    color: @fg-white;
+    padding: 0 12px;
+}
+
+#keyboard-state, 
+#idle_inhibitor, 
+#wireplumber, 
+#wireplumber#source, 
+#network {
+    padding: 0 12px;
+    color: @fg-white;
+}
+
+#keyboard-state label.locked {
+    color: @doom-blue;
+    background: transparent;
+}
+
+#idle_inhibitor.activated {
+    color: @doom-blue;
+}
+
+#wireplumber.sink-muted {
+    color: @doom-red;
+}
+
+/* Audio: Micrófono Muteado */
+#wireplumber#source.source-muted {
+    color: @doom-red;
+}
+
+#network.disconnected {
+    color: @doom-red;
+}

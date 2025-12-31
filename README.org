@@ -1,6 +1,14 @@
 #+title: Mi repositorio de archivos dotfiles
 #+author: Andres Angarita
 
+- Fuzzel
+- mako
+- Screenshot
+- Pick color
+- Login
+- hyprlock swaylock
+- Terminar sesión, reboot, etc...
+
 * Aplicaciones
 - Moom
 - Shottr

@@ -1,0 +1,90 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "margin-top": 12,
+    "margin-left": 12,
+    "margin-right": 12,
+    "spacing": 0,
+
+    "modules-left": [
+        "niri/workspaces",
+        "custom/separator",
+        "wlr/taskbar",
+    ],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "keyboard-state",
+        "idle_inhibitor",
+        "wireplumber",
+        "wireplumber#source",
+        "network"
+    ],
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "⦿",
+            "default": "●",
+        }
+    },
+    "custom/separator": {
+        "format": " ",
+        "interval": "once",
+        "tooltip": false,
+    },
+    "wlr/taskbar": {
+        "icon-size": 29,
+        "icon-theme": "Tela-dark",
+        "on-click": "activate",
+        "tooltip": false,
+    },
+    "clock": {
+        "format": "{:%b %d %I:%M %p}",
+        "tooltip": false,
+    },
+    "keyboard-state": {
+        "numlock": false,
+        "capslock": true,
+        "format": "{icon}",
+        "format-icons": {
+            "locked": "󰪛",
+            "unlocked": "󰪛"
+        }
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip-format-activated": "Activado",
+        "tooltip-format-deactivated": "Desactivado",
+    },
+    "wireplumber": {
+        "node-type": "Audio/Sink",
+        "format": "󰕾",
+        "format-muted": "󰕾",
+        "format-icons": ["󰕿", "󰖀", "󰖀", "󰕾"],
+        "tooltip-format": "Vol: {volume}%",
+    },
+    "wireplumber#source": {
+        "node-type": "Audio/Source",
+        "format": "",
+        "format-muted": "",
+        "tooltip-format": "Vol: {volume}%",
+    },
+    "network": {
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤮",
+        "tooltip-format-wifi": "{essid}: {signalStrength}%",
+        //"on-click": "nm-connection-editor"
+        "format-icons": [
+            "󰤯", // 0-20% (Muy baja)
+            "󰤟", // 20-40%
+            "󰤢", // 40-60%
+            "󰤥", // 60-80%
+            "󰤨"  // 80-100% (Llena)
+        ],
+    }
+}

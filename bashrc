@@ -23,6 +23,7 @@ WHITE=$(tput setaf 15)
 # Variables de entorno generales
 # #####################################################################################
 export PS1='● '
+
 export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
 export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
 
