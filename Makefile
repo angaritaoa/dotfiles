@@ -24,16 +24,23 @@ fedora:
 	sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 	sudo usermod -a -G input angaritaoa
 
+.PHONY: debian
+debian:
+	sudo aptitude install \
+		curl wget git coreutils tree p7zip xz-utils bash-completion vim foot mako-notifier waybar intel-media-va-driver-non-free \
+		libva2 nvtop breeze-cursor-theme playerctl ffmpeg mesa-va-drivers gdm hyprland hyprland-qtutils hypridle hyprlock hyprpaper \
+		hyprpicker
+
 .PHONY: systemd
 systemd:
-	ln -fns ${PWD}/systemd/swaybg.service ~/.config/systemd/user/swaybg.service
-	ln -fns ${PWD}/systemd/swayidle.service ~/.config/systemd/user/swayidle.service
-	systemctl --user daemon-reload
+#	ln -fns ${PWD}/systemd/swaybg.service ~/.config/systemd/user/swaybg.service
+#	ln -fns ${PWD}/systemd/swayidle.service ~/.config/systemd/user/swayidle.service
+#	systemctl --user daemon-reload
 	systemctl --user enable --now ssh-agent.socket
-	systemctl --user add-wants niri.service mako.service
-	systemctl --user add-wants niri.service waybar.service
-	systemctl --user add-wants niri.service swaybg.service
-	systemctl --user add-wants niri.service swayidle.service
+#	systemctl --user add-wants niri.service mako.service
+#	systemctl --user add-wants niri.service waybar.service
+#	systemctl --user add-wants niri.service swaybg.service
+#	systemctl --user add-wants niri.service swayidle.service
 
 .PHONY: fonts
 fonts:
