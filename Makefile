@@ -15,6 +15,7 @@ SU                  = sudo
 CP                  = cp -f
 ECHO                = echo -e
 OK                  = $(ECHO) "  [$(GREEN)OK$(RESET)]"
+MKDIR               = mkdir -p
 
 # ########################################################################################################
 # Fontconfig                                                                                             #
@@ -33,8 +34,11 @@ SYS_PROFILE         = ~/.profile
 # ########################################################################################################
 # Git                                                                                                    #
 # ########################################################################################################                                                                                               #
+SSH_DIR             = ~/.ssh
 USER_GIT_CONF       = git/gitconfig
 SYS_GIT_CONF        = ~/.gitconfig
+USER_GIT_SSH        = /mnt/archivos/config/ssh/github
+SYS_GIT_SSH         = ~/.ssh/github
 
 # ########################################################################################################
 # Niri                                                                                                   #
@@ -92,18 +96,27 @@ $(SYS_PROFILE) : $(USER_PROFILE)
 
 $(USER_PROFILE) :
 
-git: $(SYS_GIT_CONF)
+git: $(SYS_GIT_CONF) $(SYS_GIT_SSH)
 
 $(SYS_GIT_CONF) : $(USER_GIT_CONF)
 	@$(CP) $(USER_GIT_CONF) $(SYS_GIT_CONF)
-	@$(OK) "Git"
+	@$(OK) "Git CONF"
 
 $(USER_GIT_CONF) :
+
+$(SYS_GIT_SSH) : $(USER_GIT_SSH)
+	@$(MKDIR) $(SSH_DIR)
+	@$(CP) $(USER_GIT_SSH) $(SYS_GIT_SSH)
+	@chmod 700 $(SSH_DIR)
+	@chmod 600 $(SYS_GIT_SSH)
+	@$(OK) "Git SSH"
+
+$(USER_GIT_SSH) :
 
 niri : $(SYS_NIRI_CONF)
 
 $(SYS_NIRI_CONF) : $(USER_NIRI_CONF)
-	@mkdir -p $(NIRI_DIR)
+	@$(MKDIR) $(NIRI_DIR)
 	@$(CP) $(USER_NIRI_CONF) $(SYS_NIRI_CONF)
 	niri msg action load-config-file
 	@$(OK) "Niri"
@@ -113,7 +126,7 @@ $(USER_NIRI_CONF) :
 foot : $(SYS_FOOT_CONF)
 
 $(SYS_FOOT_CONF) : $(USER_FOOT_CONF)
-	@mkdir -p $(FOOT_DIR)
+	@$(MKDIR) $(FOOT_DIR)
 	@$(CP) $(USER_FOOT_CONF) $(SYS_FOOT_CONF)
 	@$(OK) "Foot"
 
@@ -122,14 +135,14 @@ $(USER_FOOT_CONF) :
 waybar : $(SYS_WAYBAR_CONF) $(SYS_WAYBAR_CSS)
 
 $(SYS_WAYBAR_CONF) : $(USER_WAYBAR_CONF)
-	@mkdir -p $(WAYBAR_DIR)
+	@$(MKDIR) $(WAYBAR_DIR)
 	@$(CP) $(USER_WAYBAR_CONF) $(SYS_WAYBAR_CONF)
 	@$(OK) "Waybar CONF"
 
 $(USER_WAYBAR_CONF) :
 
 $(SYS_WAYBAR_CSS) : $(USER_WAYBAR_CSS)
-	@mkdir -p $(WAYBAR_DIR)
+	@$(MKDIR) $(WAYBAR_DIR)
 	@$(CP) $(USER_WAYBAR_CSS) $(SYS_WAYBAR_CSS)
 	@$(OK) "Waybar CSS"
 
