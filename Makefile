@@ -82,7 +82,6 @@ bash : $(SYS_BASH_RC) $(SYS_PROFILE)
 
 $(SYS_BASH_RC) : $(USER_BASH_RC)
 	@$(CP) $(USER_BASH_RC) $(SYS_BASH_RC)
-	@source $(SYS_BASH_RC)
 	@$(OK) "Bash: bashrc"
 
 $(USER_BASH_RC) :
