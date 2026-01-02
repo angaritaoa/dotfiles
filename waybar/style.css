@@ -21,7 +21,7 @@ window#waybar {
     background-color: @doom-bg-bar; 
     background-color: transparent; 
     color: @fg-white;
-    border-radius: 20;
+    border-radius: 20px;
     transition-property: background-color;
     transition-duration: .5s;
 }

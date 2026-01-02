@@ -27,7 +27,7 @@ output "DP-2" {
 }
 
 layout {
-    gaps 14
+    gaps 15
     center-focused-column "never"
     preset-column-widths {
         proportion 0.33333
@@ -51,8 +51,8 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         on
-        softness 25
-        spread 5
+        softness 10
+        spread 2
         offset x=0 y=0
         color "#000007ff"
     }
@@ -71,7 +71,7 @@ prefer-no-csd
 screenshot-path null
 
 cursor {
-    xcursor-theme "breeze_cursors"
+    xcursor-theme "Adwaita"
     xcursor-size 32
     hide-when-typing
     hide-after-inactive-ms 2000
