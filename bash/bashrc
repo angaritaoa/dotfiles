@@ -17,9 +17,6 @@ WHITE=$(tput setaf 15)
 # #####################################################################################
 export PS1='● '
 
-export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
-export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
-
 # #####################################################################################
 # Alias generales
 # #####################################################################################
@@ -63,7 +60,7 @@ ssh-add ~/.ssh/github > /dev/null 2>&1
 # #####################################################################################
 # Configuración de rutas de directorios para busqueda de binarios
 # #####################################################################################
-[ -d ~/.emacs.d/bin ] && export PATH=~/.emacs.d/bin:$PATH
-[ -d ~/.local/bin   ] && export PATH=~/.local/bin:$PATH
-[ -d ~/.flutter/bin ] && export PATH=~/.flutter/bin:$PATH
+export PATH=~/.config/emacs/bin:$PATH
+export PATH=~/.local/bin:$PATH
+export PATH=~/.flutter/bin:$PATH
 
