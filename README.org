@@ -1,50 +1,19 @@
 #+title: Mi repositorio de archivos dotfiles
 #+author: Andres Angarita
 
+* Instalación
+#+begin_src shell
+git clone git@github.com:angaritaoa/dotfiles.git
+cd dotfiles
+make
+#+end_src
+
+* Pendientes
 - Fuzzel
 - mako
 - Screenshot
 - Pick color
 - Login
-- hyprlock swaylock
+- swaylock
 - Terminar sesión, reboot, etc...
-
-* Aplicaciones
-- Moom
-- Shottr
-- MacMouseFix
-- AppCleaner
-- DeepL
-
-* Dotfiles
-** Instalación
-*** Instalar Homebrew
-Ejecuta la regla ~brew~ para instalar Homebrew. El script de instalación explica
-paso a paso lo que va a realizar y se toma una pausa para confirmar antes de
-empezar:
-#+begin_src shell
-make brew
-#+end_src
-
-*** Instalar paquetes
-Ejecuta la regla ~macos~ para instalar los paquetes generales desde Homebrew:
-#+begin_src shell
-make macos
-#+end_src
-
-*** Instalar los archivos dotfiles
-Ejecutar la regla ~dotfiles~ para instalar los archivos de configuración en sus
-respectivas rutas. Normalmente se crearan enlaces simbólicos.
-#+begin_src shell
-make dotfiles
-#+end_src
-
-*** Instalar emacs
-Ejecutar la regla ~emacs~ para instalar Emacs y el marco de configuración Doom
-Emacs:
-#+begin_src shell
-make emacs
-#+end_src
-
-*** Importar el perfil en la terminal
-Importar el perfil ~OneDark.terminal~ en la Terminal de MacOS.
+  
