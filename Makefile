@@ -118,7 +118,7 @@ niri : $(SYS_NIRI_CONF)
 $(SYS_NIRI_CONF) : $(USER_NIRI_CONF)
 	@$(MKDIR) $(NIRI_DIR)
 	@$(CP) $(USER_NIRI_CONF) $(SYS_NIRI_CONF)
-	niri msg action load-config-file
+	@niri msg action load-config-file
 	@$(OK) "Niri"
 
 $(USER_NIRI_CONF) :

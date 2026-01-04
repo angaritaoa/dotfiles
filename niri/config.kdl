@@ -3,7 +3,7 @@ input {
         xkb {
             layout "us(intl)"
         }
-        repeat-delay 200
+        repeat-delay 500
         track-layout "global"
     }
 
