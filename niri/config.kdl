@@ -51,10 +51,10 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         on
-        softness 10
-        spread 2
-        offset x=0 y=0
-        color "#000007ff"
+        softness 40
+        spread 12
+        offset x=0 y=6
+        color "#00000066"
     }
 }
 
@@ -85,19 +85,24 @@ animations {
     // slowdown 3.0
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
 window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
 window-rule {
     match app-id=r#"Nautilus$"#
+    match app-id=r#"drawing"#
+    open-floating true
+    default-column-width { proportion 0.3; }
+    default-window-height { proportion 0.3; }
+}
+
+window-rule {
     match app-id=r#"eyedropper"#
     open-floating true
+    default-column-width { proportion 0.1; }
+    default-window-height { proportion 0.2; }
 }
 
 // Example: block out two password managers from screen capture.
@@ -127,11 +132,24 @@ binds {
     Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
+    //XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"; }
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn "sh" "-c" "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+ && notify-send -h string:x-canonical-private-synchronous:volume_notify -u low -i audio-volume-high 'Volumen' \"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)\"%\"}')\"";
+    }
+
+    //XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && notify-send -h string:x-canonical-private-synchronous:volume_notify -u low -i audio-volume-low 'Volumen' \"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)\"%\"}')\"";
+    }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86Launch5          allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"; } // comando wev
-    XF86Launch6          allow-when-locked=true { spawn-sh "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+"; }
+    //XF86Launch5          allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"; } // comando wev
+    XF86Launch5 allow-when-locked=true {
+        spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%- && notify-send -h string:x-canonical-private-synchronous:mic_notify -u low -i microphone-sensitivity-medium 'Micrófono' \"$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{print int($2*100)\"%\"}')\"";
+    }
+    //XF86Launch6          allow-when-locked=true { spawn-sh "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+"; }
+    XF86Launch6 allow-when-locked=true {
+        spawn "sh" "-c" "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+ && notify-send -h string:x-canonical-private-synchronous:mic_notify -u low -i microphone-sensitivity-high 'Micrófono' \"$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{print int($2*100)\"%\"}')\"";
+    }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
     XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
     XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }

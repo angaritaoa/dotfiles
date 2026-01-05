@@ -1,0 +1,61 @@
+# Configuración de Mako - Tema Doom Emacs One Dark
+
+# --- Configuración General ---
+font=Roboto 16
+width=350
+height=150
+margin=10,10,10,10
+padding=15
+border-size=2
+border-radius=10
+icons=1
+max-icon-size=48
+# Posición de la notificación (top-right, top-center, etc.)
+anchor=top-center
+
+# Opciones de formato (negrita para el título)
+markup=1
+format=<b>%s</b>\n%b
+
+# Tiempo por defecto (en milisegundos, 5000 = 5 segundos)
+default-timeout=5000
+ignore-timeout=1
+#margin-bottom=50
+
+# --- Colores Base (Normal) ---
+# Fondo: --bg (#282c34)
+background-color=#282c34D9
+# Texto: --fg (#bbc2cf)
+text-color=#bbc2cf
+# Borde: --blue (#51afef)
+border-color=#51afef
+
+# --- Colores de la Barra de Progreso ---
+# Usamos el mismo azul sobre el fondo
+progress-color=over #51afef
+
+# --- Categoría: Urgencia Baja ---
+[urgency=low]
+# Borde Gris: --base5 (#5b6268)
+border-color=#5b6268
+default-timeout=5000
+
+# --- Categoría: Urgencia Normal ---
+[urgency=normal]
+# Mantiene los valores por defecto (Azul)
+border-color=#51afef
+
+# --- Categoría: Urgencia Crítica ---
+[urgency=critical]
+# Borde Rojo: --red (#ff6c6b)
+border-color=#ff6c6b
+# Fondo un poco más oscuro para resaltar: --base0 (#1b2229)
+background-color=#1b2229D9
+# Las críticas no desaparecen solas (0)
+default-timeout=0
+
+# --- Estilo de Agrupación ---
+# Cuando hay muchas notificaciones
+[grouped]
+format=<b>%s</b>\n%b\n(%g)
+

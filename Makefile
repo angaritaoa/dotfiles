@@ -71,15 +71,22 @@ USER_SWAYLOCK_CONF  = swaylock/config
 SYS_SWAYLOCK_CONF   = ~/.config/swaylock/config
 
 # ########################################################################################################
+# swaylock                                                                                               #
+# ########################################################################################################
+MAKO_DIR            = ~/.config/mako
+USER_MAKO_CONF      = mako/config
+SYS_MAKO_CONF       = ~/.config/mako/config
+
+# ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
 .ONESHELL :
 
 .PHONY: dotfiles fontconfig bash git niri foot \
-	waybar swaylock
+	waybar swaylock mako
 
 dotfiles : fontconfig bash git niri foot waybar \
-	swaylock
+	swaylock mako
 
 fontconfig : $(SYS_FONT_CONF)
 
@@ -163,3 +170,13 @@ $(SYS_SWAYLOCK_CONF) : $(USER_SWAYLOCK_CONF)
 	@$(OK) "swaylock"
 
 $(USER_SWAYLOCK_CONF) :
+
+mako : $(SYS_MAKO_CONF)
+
+$(SYS_MAKO_CONF) : $(USER_MAKO_CONF)
+	@$(MKDIR) $(MAKO_DIR)
+	@$(CP) $(USER_MAKO_CONF) $(SYS_MAKO_CONF)
+	@makoctl reload
+	@$(OK) "mako"
+
+$(USER_MAKO_CONF) :

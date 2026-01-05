@@ -57,6 +57,7 @@
             "activated": "",
             "deactivated": ""
         },
+        "tooltip": false,
         "tooltip-format-activated": "Activado",
         "tooltip-format-deactivated": "Desactivado",
     },
@@ -66,17 +67,20 @@
         "format-muted": "󰕾",
         "format-icons": ["󰕿", "󰖀", "󰖀", "󰕾"],
         "tooltip-format": "Vol: {volume}%",
+        "tooltip": false,
     },
     "wireplumber#source": {
         "node-type": "Audio/Source",
         "format": "",
         "format-muted": "",
         "tooltip-format": "Vol: {volume}%",
+        "tooltip": false,
     },
     "network": {
         "format-wifi": "{icon}",
         "format-ethernet": "󰈀",
         "format-disconnected": "󰤮",
+        "tooltip": false,
         "tooltip-format-wifi": "{essid}: {signalStrength}%",
         //"on-click": "nm-connection-editor"
         "format-icons": [
