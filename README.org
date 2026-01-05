@@ -9,11 +9,7 @@ make
 #+end_src
 
 * Pendientes
-- Fuzzel
+- Vicinae: Terminar sesión, reboot, etc...
 - mako
-- Screenshot
-- Pick color
 - Login
 - swaylock
-- Terminar sesión, reboot, etc...
-  

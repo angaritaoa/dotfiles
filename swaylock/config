@@ -1,0 +1,52 @@
+# Configuración de Swaylock - Tema Doom Emacs One Dark
+
+# --- Configuración General ---
+font=Roboto
+font-size=24
+indicator-radius=100
+indicator-thickness=7
+show-failed-attempts
+ignore-empty-password
+
+# --- Fondo Principal ---
+# Corresponde a --bg: #282c34
+color=282c34
+
+# --- Estado: Inactivo (Idle) ---
+# El anillo exterior azul (--blue) y el interior del color de fondo
+ring-color=51afef
+inside-color=282c34
+key-hl-color=c678dd
+separator-color=282c34
+
+# --- Estado: Verificando (Verifying) ---
+# Se pone amarillo (--yellow) cuando presiona Enter
+ring-verifying-color=ecbe7b
+inside-verifying-color=ecbe7b
+text-verifying-color=282c34
+
+# --- Estado: Incorrecto (Wrong) ---
+# Se pone rojo (--red) si la contraseña falla
+ring-wrong-color=ff6c6b
+inside-wrong-color=ff6c6b
+text-wrong-color=282c34
+line-wrong-color=ff6c6b
+
+# --- Estado: Borrado (Cleared) ---
+# Se pone verde (--green) si borras lo que escribiste (Ctrl+U o Backspace)
+ring-clear-color=98be65
+inside-clear-color=98be65
+text-clear-color=282c34
+line-clear-color=98be65
+
+# --- Texto y Diseño ---
+# Color del texto general (--fg: #bbc2cf)
+text-color=bbc2cf
+
+# Color de la tecla de retroceso (Backspace) al escribir (--red)
+bs-hl-color=ff6c6b
+
+# Opciones de diseño para que se vea limpio
+line-color=00000000
+line-uses-inside
+

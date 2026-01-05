@@ -96,6 +96,7 @@ window-rule {
 
 window-rule {
     match app-id=r#"Nautilus$"#
+    match app-id=r#"eyedropper"#
     open-floating true
 }
 
@@ -216,7 +217,6 @@ binds {
     Mod+W { toggle-column-tabbed-display; }
 
     Print { screenshot; }
-    //Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
     Mod+Shift+E { quit; }
