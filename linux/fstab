@@ -1,0 +1,28 @@
+#+title: fstab
+
+El fichero fstab  (file systems table) se encuentra comúnmente  en sistemas Unix
+(en el  directorio =/etc/=)  como parte  de la configuración  del sistema.  Lo más
+destacado de  este fichero es la  lista de discos y  particiones disponibles. En
+ella se indica como montar cada dispositivo y qué configuración utilizar.
+
+A continuación  se presenta  un ejemplo  de lo que  configuro actualmente  en mi
+distrubución Fedora:
+
+#+begin_src bash
+# /etc/fstab
+# Created by anaconda on Sat Nov 27 03:06:07 2021
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+UUID=2ee4a183-8f36-4a1e-bf25-7cfe19e4047a   /                       xfs     defaults,noatime            0 0
+UUID=4220fafd-b154-492a-8e9b-078386063f90   /boot                   ext4    defaults,noatime            1 2
+UUID=F143-F7F3                              /boot/efi               vfat    umask=0077,shortname=winnt  0 2
+UUID=9dd10a3e-0aec-4ac2-9340-dfb9995f9562   /home                   xfs     defaults,noatime            0 0
+#+end_src
+
+Después de editar este archivo, ejecutar ~systemctl daemon-reload~ para actualizar
+las unidades de systemd generadas por este archivo.

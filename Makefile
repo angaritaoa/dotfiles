@@ -16,6 +16,7 @@ CP                  = cp -f
 ECHO                = echo -e
 OK                  = $(ECHO) "  [$(GREEN)OK$(RESET)]"
 MKDIR               = mkdir -p
+PWD                 = $(shell pwd)
 
 # ########################################################################################################
 # fontconfig                                                                                             #
@@ -71,18 +72,101 @@ USER_SWAYLOCK_CONF  = swaylock/config
 SYS_SWAYLOCK_CONF   = ~/.config/swaylock/config
 
 # ########################################################################################################
-# swaylock                                                                                               #
+# mako                                                                                                   #
 # ########################################################################################################
 MAKO_DIR            = ~/.config/mako
 USER_MAKO_CONF      = mako/config
 SYS_MAKO_CONF       = ~/.config/mako/config
 
 # ########################################################################################################
-# dotfiles                                                                                               #
+# makefile                                                                                               #
 # ########################################################################################################
 .ONESHELL :
 
-.PHONY: dotfiles fontconfig bash git niri foot \
+# ########################################################################################################
+# fedora                                                                                                 #
+# ########################################################################################################
+.PHONY : fedora packages user systemd fonts icons gnome
+
+fedora : packages user systemd fonts icons gnome
+
+packages :
+	@sudo dnf install --assumeyes \
+		https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(shell rpm -E %fedora).noarch.rpm \
+		https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(shell rpm -E %fedora).noarch.rpm
+	@sudo dnf upgrade --refresh --assumeyes
+	@sudo dnf remove --assumeyes \
+		zram-generator zram-generator-defaults
+	@sudo dnf swap ffmpeg-free ffmpeg --allowerasing --assumeyes
+	@sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld --assumeyes
+	@sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin \
+		--assumeyes
+	@sudo dnf install --assumeyes \
+		fedora-workstation-repositories curl wget git git-lfs coreutils tree p7zip xz bzip2 lzo lz4 lzma vlc \
+		vlc-core bash-completion kernel-tools google-chrome-stable gnome-tweaks vim niri foot mako waybar \
+		xwayland-satellite swaybg swayidle swaylock pipewire-v4l2 v4l2loopback intel-media-driver libva \
+		libva-v4l2-request libva-utils nvtop breeze-cursor-theme libheif-freeworld playerctl brightnessctl \
+		google-roboto-fonts google-roboto-mono-fonts jetbrains-mono-fonts adwaita-sans-fonts adwaita-mono-fonts \
+		dconf-editor ripgrep bat fd-find drawing
+
+user :
+	@sudo usermod -a -G input angaritaoa
+
+systemd :
+	@mkdir -p ~/.config/systemd/user
+	@ln -fns $(PWD)/systemd/swaybg.service ~/.config/systemd/user/swaybg.service
+	@ln -fns $(PWD)/systemd/swayidle.service ~/.config/systemd/user/swayidle.service
+	@systemctl --user daemon-reload
+	@systemctl --user enable --now ssh-agent.socket
+	@systemctl --user add-wants niri.service mako.service
+	@systemctl --user add-wants niri.service waybar.service
+	@systemctl --user add-wants niri.service swaybg.service
+	@systemctl --user add-wants niri.service swayidle.service
+
+fonts :
+	@sudo cp -fR /mnt/archivos/config/fonts/Windows /usr/share/fonts
+	@sudo cp -fR /mnt/archivos/config/fonts/JetBrainsMonoNerd /usr/share/fonts
+	@sudo cp -fR /mnt/archivos/config/fonts/RobotoMonoNerd /usr/share/fonts
+	@sudo cp -fR /mnt/archivos/config/fonts/GeistMonoNerd /usr/share/fonts
+	@sudo cp -fR /mnt/archivos/config/fonts/AdwaitaMono /usr/share/fonts
+	@sudo cp -fR /mnt/archivos/config/fonts/NerdFontsSymbols /usr/share/fonts
+	@sudo fc-cache -r
+
+icons :
+	ssh-add /mnt/archivos/config/ssh/github
+	git clone https://github.com/vinceliuice/Tela-icon-theme.git
+	$(PWD)/Tela-icon-theme/install.sh
+	rm -rf Tela-icon-theme
+
+gnome :
+	@gsettings set org.gnome.desktop.interface clock-format '12h'
+	@gsettings set org.gnome.desktop.interface cursor-blink true
+	@gsettings set org.gnome.desktop.interface document-font-name 'Roboto 11'
+	@gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
+	@gsettings set org.gnome.desktop.interface font-hinting 'full'
+	@gsettings set org.gnome.desktop.interface font-name 'Roboto 11'
+	@gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
+	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+	@gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+	@gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 12'
+	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
+	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto 11'
+	@gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:close'
+	@gsettings set org.gnome.desktop.interface enable-animations true
+	@gsettings set org.gnome.desktop.interface clock-show-date true
+	@gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
+	@gsettings set org.gnome.desktop.peripherals.mouse speed 0.0
+	@gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+	@gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+	@gsettings set org.gnome.desktop.interface cursor-size 32
+	@gsettings set org.gnome.desktop.interface icon-theme 'Tela-dark'
+	@gsettings set org.gnome.desktop.wm.preferences audible-bell false
+
+# ########################################################################################################
+# dotfiles                                                                                               #
+# ########################################################################################################
+.PHONY : dotfiles fontconfig bash git niri foot \
 	waybar swaylock mako
 
 dotfiles : fontconfig bash git niri foot waybar \

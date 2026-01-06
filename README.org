@@ -5,9 +5,9 @@
 #+begin_src shell
 git clone git@github.com:angaritaoa/dotfiles.git
 cd dotfiles
-make
+make fedora
+make dotfiles
 #+end_src
 
 * Pendientes
 - Vicinae: Terminar sesión, reboot, etc...
-- Login
