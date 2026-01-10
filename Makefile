@@ -340,6 +340,7 @@ env : $(LOCAL_ENV_CONF)
 $(LOCAL_ENV_CONF) : $(USER_ENV_CONF)
 	@$(MKDIR) $(ENV_DIR)
 	@$(CP) $(USER_ENV_CONF) $(LOCAL_ENV_CONF)
+	@systemctl --user daemon-reload
 	@$(OK) "env"
 
 $(USER_ENV_CONF) :
