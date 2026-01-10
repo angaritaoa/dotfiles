@@ -110,4 +110,5 @@ tooltip label {
 
 #network.disconnected {
     color: @doom-red;
+    font-size: 19px;
 }

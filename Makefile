@@ -29,13 +29,17 @@ SYS_FONT_CONF       = /etc/fonts/local.conf
 # ########################################################################################################
 USER_BASH_RC        = bash/bashrc
 SYS_BASH_RC         = ~/.bashrc
-USER_PROFILE        = bash/profile
-SYS_PROFILE         = ~/.profile
+
+# ########################################################################################################
+# ssh                                                                                                    #
+# ########################################################################################################
+SSH_DIR             = ~/.ssh
+USER_SSH_CONF       = ssh/config
+SYS_SSH_CONF        = ~/.ssh/config
 
 # ########################################################################################################
 # git                                                                                                    #
 # ########################################################################################################
-SSH_DIR             = ~/.ssh
 USER_GIT_CONF       = git/gitconfig
 SYS_GIT_CONF        = ~/.gitconfig
 USER_GIT_SSH        = /mnt/archivos/config/ssh/github
@@ -95,6 +99,17 @@ USER_REBOOT_CONF    = desktop/reboot.desktop
 SYS_REBOOT_CONF     = ~/.local/share/applications/reboot.desktop
 USER_NIRIQUIT_CONF  = desktop/niri.desktop
 SYS_NIRIQUIT_CONF   = ~/.local/share/applications/niri.desktop
+
+# ########################################################################################################
+# environment                                                                                            #
+# ########################################################################################################
+ENV_DIR             = ~/.config/environment.d
+USER_ENV_CONF       = systemd/user_env.conf
+LOCAL_ENV_CONF      = ~/.config/environment.d/user_env.conf
+
+# ########################################################################################################
+# ssh                                                                                                    #
+# ########################################################################################################
 
 # ########################################################################################################
 # makefile                                                                                               #
@@ -194,10 +209,10 @@ gdm :
 # dotfiles                                                                                               #
 # ########################################################################################################
 .PHONY : dotfiles fontconfig bash git niri foot \
-	waybar swaylock mako fuzzel desktop
+	waybar swaylock mako fuzzel desktop env ssh
 
 dotfiles : fontconfig bash git niri foot waybar \
-	swaylock mako fuzzel desktop
+	swaylock mako fuzzel desktop env ssh
 
 fontconfig : $(SYS_FONT_CONF)
 
@@ -207,19 +222,13 @@ $(SYS_FONT_CONF) : $(USER_FONT_CONF)
 
 $(USER_FONT_CONF) :
 
-bash : $(SYS_BASH_RC) $(SYS_PROFILE)
+bash : $(SYS_BASH_RC)
 
 $(SYS_BASH_RC) : $(USER_BASH_RC)
 	@$(CP) $(USER_BASH_RC) $(SYS_BASH_RC)
 	@$(OK) "bash: bashrc"
 
 $(USER_BASH_RC) :
-
-$(SYS_PROFILE) : $(USER_PROFILE)
-	@$(CP) $(USER_PROFILE) $(SYS_PROFILE)
-	@$(OK) "bash: profile"
-
-$(USER_PROFILE) :
 
 git: $(SYS_GIT_CONF) $(SYS_GIT_SSH)
 
@@ -325,3 +334,23 @@ $(SYS_NIRIQUIT_CONF) : $(USER_NIRIQUIT_CONF)
 	@$(OK) "niriquit"
 
 $(USER_NIRIQUIT_CONF) :
+
+env : $(LOCAL_ENV_CONF)
+
+$(LOCAL_ENV_CONF) : $(USER_ENV_CONF)
+	@$(MKDIR) $(ENV_DIR)
+	@$(CP) $(USER_ENV_CONF) $(LOCAL_ENV_CONF)
+	@$(OK) "env"
+
+$(USER_ENV_CONF) :
+
+ssh: $(SYS_SSH_CONF)
+
+$(SYS_SSH_CONF) : $(USER_SSH_CONF)
+	@$(MKDIR) $(SSH_DIR)
+	@$(CP) $(USER_SSH_CONF) $(SYS_SSH_CONF)
+	@chmod 700 $(SSH_DIR)
+	@chmod 600 $(SYS_SSH_CONF)
+	@$(OK) "ssh"
+
+$(USER_SSH_CONF) :
