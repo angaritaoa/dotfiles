@@ -1,7 +1,7 @@
 # Configuración de Swaylock - Tema Doom Emacs One Dark
 
 # --- Configuración General ---
-font=Roboto
+font=Adwaita Sans
 font-size=24
 indicator-radius=100
 indicator-thickness=7

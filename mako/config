@@ -1,7 +1,7 @@
 # Configuración de Mako - Tema Doom Emacs One Dark
 
 # --- Configuración General ---
-font=Roboto 16
+font=Adwaita Sans 15
 width=350
 height=150
 margin=10,10,10,10

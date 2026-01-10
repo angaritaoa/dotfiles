@@ -1,6 +1,6 @@
-@define-color doom-bg-solid rgba(40, 44, 52, 0.98);
-@define-color doom-bg-bar   rgba(40, 44, 52, 0.50);
-@define-color fg-white      #bbc2cf;
+@define-color doom-bg       #282c34;
+@define-color doom-fg       #bbc2cf;
+@define-color doom-border   #5b6268;
 @define-color doom-blue     #51afef;
 @define-color doom-red      #ff6c6b;
 @define-color doom-green    #98be65;
@@ -9,21 +9,15 @@
 @define-color doom-cyan     #46d9ff;
 
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "Roboto", "JetBrainsMono Nerd Font";
-    /*font-size: 21px;*/
-    font-weight: 500;
-    min-height: 0;
+    font-family: "Adwaita Sans";
+    font-size: 21px;
 }
 
 window#waybar {
-    background-color: @doom-bg-bar; 
-    background-color: transparent; 
-    color: @fg-white;
-    border-radius: 20px;
+    background-color: transparent;
+    color: @doom-fg;
     transition-property: background-color;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
@@ -31,75 +25,70 @@ window#waybar.hidden {
 }
 
 tooltip {
-    background-color: @doom-bg-solid; 
-    border: 1px solid #3f444a;
+    background-color: @doom-bg;
+    border: 2px solid @doom-border;
     border-radius: 8px;
 }
 
 tooltip label {
-  color: @fg-white;
+    color: @doom-fg;
 }
 
-#custom-separator {
-    margin: 0 2px;
-}
-
-/*.modules-left, .modules-center, .modules-right {*/
-#workspaces, #taskbar, .modules-center, .modules-right {
-    background-color: @doom-bg-solid;
+#workspaces,
+#taskbar,
+.modules-center {
+    background-color: @doom-bg;
     border-radius: 20px;
-    padding: 2px 12px;
+    padding: 1px 12px;
     box-shadow: none;
-    /*border: 2px solid #5b6268;*/
-}
-
-#workspaces, .modules-right {
-    font-size: 24px;
 }
 
 #taskbar.empty {
     background-color: transparent;
 }
 
-#workspaces button, #taskbar button {
+#workspaces button,
+#taskbar button {
     border-radius: 20px;
     padding: 0 12px;
     margin: 0 1px;
     background-color: transparent;
-    color: rgba(187, 194, 207, 0.4); 
+    color: @doom-fg;
     transition: all 0.3s ease;
     box-shadow: none;
     border: none;
 }
 
-#workspaces button:hover, #taskbar button:hover {
-    background-color: rgba(255, 255, 255, 0.1); 
-    color: @fg-white; 
+#workspaces button:hover {
+    background-color: transparent;
+    color: @doom-fg;
 }
 
-#workspaces button.active, #taskbar button.active {
-    background-color: transparent; /* Sin fondo */
-    color: @doom-blue; 
+#workspaces button.active {
+    background-color: transparent;
+    color: @doom-blue;
     text-shadow: 0 0 5px rgba(81, 175, 239, 0.4);
 }
 
-#workspaces button.urgent, #taskbar button.urgent {
+#workspaces button.urgent {
     background-color: transparent;
     color: @doom-red;
 }
 
 #clock {
-    color: @fg-white;
-    padding: 0 12px;
+    background-color: @doom-bg;
+    border-radius: 20px;
+    padding: 0px 24px;
+    box-shadow: none;
 }
 
-#keyboard-state, 
-#idle_inhibitor, 
-#wireplumber, 
-#wireplumber#source, 
+#keyboard-state,
+#idle_inhibitor,
+#wireplumber,
+#wireplumber#source,
 #network {
     padding: 0 12px;
-    color: @fg-white;
+    color: @doom-fg;
 }
 
 #keyboard-state label.locked {
@@ -115,7 +104,6 @@ tooltip label {
     color: @doom-red;
 }
 
-/* Audio: Micrófono Muteado */
 #wireplumber#source.source-muted {
     color: @doom-red;
 }

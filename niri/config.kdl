@@ -127,9 +127,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+E hotkey-overlay-title="Text Editor: Emacs" { spawn "emacs"; }
     Mod+T hotkey-overlay-title="Terminal: Foot" { spawn "foot"; }
-    //Mod+F hotkey-overlay-title="Web Browser: Firefox" { spawn "firefox"; }
-    Mod+G hotkey-overlay-title="Web Browser: Firefox" { spawn "google-chrome"; }
-    Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+F hotkey-overlay-title="Web Browser: Firefox" { spawn "firefox"; }
+    Mod+Space hotkey-overlay-title="Run an Application: Rofi" { spawn "fuzzel"; }
     Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     //XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"; }

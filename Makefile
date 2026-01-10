@@ -79,6 +79,20 @@ USER_MAKO_CONF      = mako/config
 SYS_MAKO_CONF       = ~/.config/mako/config
 
 # ########################################################################################################
+# fuzzel                                                                                                 #
+# ########################################################################################################
+FUZZEL_DIR          = ~/.config/fuzzel
+USER_FUZZEL_CONF    = fuzzel/fuzzel.ini
+SYS_FUZZEL_CONF     = ~/.config/fuzzel/fuzzel.ini
+
+# ########################################################################################################
+# fuzzel                                                                                                 #
+# ########################################################################################################
+ROFI_DIR            = ~/.config/rofi
+USER_ROFI_CONF      = rofi/config.rasi
+SYS_ROFI_CONF       = ~/.config/rofi/config.rasi
+
+# ########################################################################################################
 # makefile                                                                                               #
 # ########################################################################################################
 .ONESHELL :
@@ -86,9 +100,9 @@ SYS_MAKO_CONF       = ~/.config/mako/config
 # ########################################################################################################
 # fedora                                                                                                 #
 # ########################################################################################################
-.PHONY : fedora packages user systemd fonts icons gnome
+.PHONY : fedora packages user systemd fonts images icons gnome gdm
 
-fedora : packages user systemd fonts icons gnome
+fedora : packages user systemd fonts images icons gnome gdm
 
 packages :
 	@sudo dnf install --assumeyes \
@@ -107,7 +121,7 @@ packages :
 		xwayland-satellite swaybg swayidle swaylock pipewire-v4l2 v4l2loopback intel-media-driver libva \
 		libva-v4l2-request libva-utils nvtop breeze-cursor-theme libheif-freeworld playerctl brightnessctl \
 		google-roboto-fonts google-roboto-mono-fonts jetbrains-mono-fonts adwaita-sans-fonts adwaita-mono-fonts \
-		dconf-editor ripgrep bat fd-find drawing
+		dconf-editor ripgrep bat fd-find drawing rofi
 
 user :
 	@sudo usermod -a -G input angaritaoa
@@ -132,6 +146,10 @@ fonts :
 	@sudo cp -fR /mnt/archivos/config/fonts/NerdFontsSymbols /usr/share/fonts
 	@sudo fc-cache -r
 
+images :
+	mkdir -p ~/.config/backgrounds
+	cp -f /mnt/archivos/config/images/* ~/.config/backgrounds
+
 icons :
 	ssh-add /mnt/archivos/config/ssh/github
 	git clone https://github.com/vinceliuice/Tela-icon-theme.git
@@ -141,17 +159,17 @@ icons :
 gnome :
 	@gsettings set org.gnome.desktop.interface clock-format '12h'
 	@gsettings set org.gnome.desktop.interface cursor-blink true
-	@gsettings set org.gnome.desktop.interface document-font-name 'Roboto 11'
+	@gsettings set org.gnome.desktop.interface document-font-name 'Adwaita Sans 10'
 	@gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
 	@gsettings set org.gnome.desktop.interface font-hinting 'full'
-	@gsettings set org.gnome.desktop.interface font-name 'Roboto 11'
+	@gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 10'
 	@gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
 	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
-	@gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 12'
+	@gsettings set org.gnome.desktop.interface monospace-font-name 'Adwaita Mono 10'
 	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
-	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto 11'
+	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10'
 	@gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:close'
 	@gsettings set org.gnome.desktop.interface enable-animations true
 	@gsettings set org.gnome.desktop.interface clock-show-date true
@@ -163,14 +181,19 @@ gnome :
 	@gsettings set org.gnome.desktop.interface icon-theme 'Tela-dark'
 	@gsettings set org.gnome.desktop.wm.preferences audible-bell false
 
+gdm :
+	sudo mkdir -p /etc/dconf/db/gdm.d
+	sudo cp -f $(PWD)/gdm/scaling /etc/dconf/db/gdm.d
+	sudo dconf update
+
 # ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
 .PHONY : dotfiles fontconfig bash git niri foot \
-	waybar swaylock mako
+	waybar swaylock mako fuzzel rofi
 
 dotfiles : fontconfig bash git niri foot waybar \
-	swaylock mako
+	swaylock mako fuzzel rofi
 
 fontconfig : $(SYS_FONT_CONF)
 
@@ -235,6 +258,7 @@ waybar : $(SYS_WAYBAR_CONF) $(SYS_WAYBAR_CSS)
 $(SYS_WAYBAR_CONF) : $(USER_WAYBAR_CONF)
 	@$(MKDIR) $(WAYBAR_DIR)
 	@$(CP) $(USER_WAYBAR_CONF) $(SYS_WAYBAR_CONF)
+	@systemctl --user restart waybar.service
 	@$(OK) "waybar conf"
 
 $(USER_WAYBAR_CONF) :
@@ -242,6 +266,7 @@ $(USER_WAYBAR_CONF) :
 $(SYS_WAYBAR_CSS) : $(USER_WAYBAR_CSS)
 	@$(MKDIR) $(WAYBAR_DIR)
 	@$(CP) $(USER_WAYBAR_CSS) $(SYS_WAYBAR_CSS)
+	@systemctl --user restart waybar.service
 	@$(OK) "waybar css"
 
 $(USER_WAYBAR_CSS) :
@@ -264,3 +289,21 @@ $(SYS_MAKO_CONF) : $(USER_MAKO_CONF)
 	@$(OK) "mako"
 
 $(USER_MAKO_CONF) :
+
+fuzzel : $(SYS_FUZZEL_CONF)
+
+$(SYS_FUZZEL_CONF) : $(USER_FUZZEL_CONF)
+	@$(MKDIR) $(FUZZEL_DIR)
+	@$(CP) $(USER_FUZZEL_CONF) $(SYS_FUZZEL_CONF)
+	@$(OK) "fuzzel"
+
+$(USER_FUZZEL_CONF) :
+
+rofi : $(SYS_ROFI_CONF)
+
+$(SYS_ROFI_CONF) : $(USER_ROFI_CONF)
+	@$(MKDIR) $(ROFI_DIR)
+	@$(CP) $(USER_ROFI_CONF) $(SYS_ROFI_CONF)
+	@$(OK) "rofi"
+
+$(USER_ROFI_CONF) :
