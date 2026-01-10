@@ -8,6 +8,3 @@ cd dotfiles
 make fedora
 make dotfiles
 #+end_src
-
-* Pendientes
-- Vicinae: Terminar sesión, reboot, etc...
