@@ -85,6 +85,19 @@ animations {
     // slowdown 3.0
 }
 
+layer-rule {
+    match namespace="^launcher$"
+    shadow {
+        on
+        softness 40
+        spread 12
+        offset x=0 y=6
+        color "#00000066"
+    }
+
+    geometry-corner-radius 10
+}
+
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true

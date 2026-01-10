@@ -86,13 +86,6 @@ USER_FUZZEL_CONF    = fuzzel/fuzzel.ini
 SYS_FUZZEL_CONF     = ~/.config/fuzzel/fuzzel.ini
 
 # ########################################################################################################
-# fuzzel                                                                                                 #
-# ########################################################################################################
-ROFI_DIR            = ~/.config/rofi
-USER_ROFI_CONF      = rofi/config.rasi
-SYS_ROFI_CONF       = ~/.config/rofi/config.rasi
-
-# ########################################################################################################
 # makefile                                                                                               #
 # ########################################################################################################
 .ONESHELL :
@@ -190,10 +183,10 @@ gdm :
 # dotfiles                                                                                               #
 # ########################################################################################################
 .PHONY : dotfiles fontconfig bash git niri foot \
-	waybar swaylock mako fuzzel rofi
+	waybar swaylock mako fuzzel
 
 dotfiles : fontconfig bash git niri foot waybar \
-	swaylock mako fuzzel rofi
+	swaylock mako fuzzel
 
 fontconfig : $(SYS_FONT_CONF)
 
@@ -299,11 +292,3 @@ $(SYS_FUZZEL_CONF) : $(USER_FUZZEL_CONF)
 
 $(USER_FUZZEL_CONF) :
 
-rofi : $(SYS_ROFI_CONF)
-
-$(SYS_ROFI_CONF) : $(USER_ROFI_CONF)
-	@$(MKDIR) $(ROFI_DIR)
-	@$(CP) $(USER_ROFI_CONF) $(SYS_ROFI_CONF)
-	@$(OK) "rofi"
-
-$(USER_ROFI_CONF) :
