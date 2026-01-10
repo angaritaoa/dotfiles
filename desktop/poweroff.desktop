@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Poweroff
+Comment=Apaga la computadora inmediatamente
+Exec=systemctl poweroff
+Icon=system-shutdown
+Terminal=false
+Categories=System;
+Keywords=shutdown;power;apagar;

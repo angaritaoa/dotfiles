@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Reboot
+Comment=Reinicia la computadora inmediatamente
+Exec=systemctl reboot
+Icon=system-reboot
+Terminal=false
+Categories=System;
+Keywords=reboot;restart;reiniciar;

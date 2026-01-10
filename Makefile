@@ -86,6 +86,17 @@ USER_FUZZEL_CONF    = fuzzel/fuzzel.ini
 SYS_FUZZEL_CONF     = ~/.config/fuzzel/fuzzel.ini
 
 # ########################################################################################################
+# desktop                                                                                                #
+# ########################################################################################################
+DESKTOP_DIR         = ~/.local/share/applications
+USER_POWEROFF_CONF  = desktop/poweroff.desktop
+SYS_POWEROFF_CONF   = ~/.local/share/applications/poweroff.desktop
+USER_REBOOT_CONF    = desktop/reboot.desktop
+SYS_REBOOT_CONF     = ~/.local/share/applications/reboot.desktop
+USER_NIRIQUIT_CONF  = desktop/niri.desktop
+SYS_NIRIQUIT_CONF   = ~/.local/share/applications/niri.desktop
+
+# ########################################################################################################
 # makefile                                                                                               #
 # ########################################################################################################
 .ONESHELL :
@@ -183,10 +194,10 @@ gdm :
 # dotfiles                                                                                               #
 # ########################################################################################################
 .PHONY : dotfiles fontconfig bash git niri foot \
-	waybar swaylock mako fuzzel
+	waybar swaylock mako fuzzel desktop
 
 dotfiles : fontconfig bash git niri foot waybar \
-	swaylock mako fuzzel
+	swaylock mako fuzzel desktop
 
 fontconfig : $(SYS_FONT_CONF)
 
@@ -292,3 +303,25 @@ $(SYS_FUZZEL_CONF) : $(USER_FUZZEL_CONF)
 
 $(USER_FUZZEL_CONF) :
 
+desktop : $(SYS_POWEROFF_CONF) $(SYS_REBOOT_CONF) $(SYS_NIRIQUIT_CONF)
+
+$(SYS_POWEROFF_CONF) : $(USER_POWEROFF_CONF)
+	@$(MKDIR) $(DESKTOP_DIR)
+	@$(CP) $(USER_POWEROFF_CONF) $(SYS_POWEROFF_CONF)
+	@$(OK) "poweroff"
+
+$(USER_POWEROFF_CONF) :
+
+$(SYS_REBOOT_CONF) : $(USER_REBOOT_CONF)
+	@$(MKDIR) $(DESKTOP_DIR)
+	@$(CP) $(USER_REBOOT_CONF) $(SYS_REBOOT_CONF)
+	@$(OK) "reboot"
+
+$(USER_REBOOT_CONF) :
+
+$(SYS_NIRIQUIT_CONF) : $(USER_NIRIQUIT_CONF)
+	@$(MKDIR) $(DESKTOP_DIR)
+	@$(CP) $(USER_NIRIQUIT_CONF) $(SYS_NIRIQUIT_CONF)
+	@$(OK) "niriquit"
+
+$(USER_NIRIQUIT_CONF) :
