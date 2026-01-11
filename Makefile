@@ -127,6 +127,7 @@ packages :
 	@sudo dnf install --assumeyes \
 		https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(shell rpm -E %fedora).noarch.rpm \
 		https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(shell rpm -E %fedora).noarch.rpm
+	@sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 	@sudo dnf upgrade --refresh --assumeyes
 	@sudo dnf remove --assumeyes \
 		zram-generator zram-generator-defaults
