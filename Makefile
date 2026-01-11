@@ -133,6 +133,7 @@ packages :
 		zram-generator zram-generator-defaults
 	@sudo dnf swap ffmpeg-free ffmpeg --allowerasing --assumeyes
 	@sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld --assumeyes
+	@sudo sudo dnf swap mesa-vulkan-drivers mesa-vulkan-drivers-freeworld --allowerasing --assumeyes
 	@sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin \
 		--assumeyes
 	@sudo dnf install --assumeyes \
@@ -141,7 +142,7 @@ packages :
 		xwayland-satellite swaybg swayidle swaylock pipewire-v4l2 v4l2loopback intel-media-driver libva \
 		libva-v4l2-request libva-utils nvtop breeze-cursor-theme libheif-freeworld playerctl brightnessctl \
 		google-roboto-fonts google-roboto-mono-fonts jetbrains-mono-fonts adwaita-sans-fonts adwaita-mono-fonts \
-		dconf-editor ripgrep bat fd-find drawing rofi
+		dconf-editor ripgrep bat fd-find drawing pipewire-plugin-vulkan vulkan-tools
 
 user :
 	@sudo usermod -a -G input angaritaoa
