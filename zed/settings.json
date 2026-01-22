@@ -74,7 +74,7 @@
   // Editor Toolbar
   ///////////////////////////////////////////////////////////////////////////////////////
   "toolbar": {
-    "breadcrumbs": true,
+    "breadcrumbs": false,
     "quick_actions": false,
   },
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -93,12 +93,16 @@
   // Editor Tabs
   ///////////////////////////////////////////////////////////////////////////////////////
   "tab_bar": {
-    "show": false,
-    "show_nav_history_buttons": true,
+    "show": true,
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false,
   },
   "tabs": {
     "git_status": true,
     "file_icons": true,
+    "close_position": "right",
+    "show_close_button": "hover",
+    "show_diagnostics": "off",
   },
   ///////////////////////////////////////////////////////////////////////////////////////
   // Status Bar
