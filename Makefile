@@ -108,8 +108,16 @@ USER_ENV_CONF       = systemd/user_env.conf
 LOCAL_ENV_CONF      = ~/.config/environment.d/user_env.conf
 
 # ########################################################################################################
-# ssh                                                                                                    #
+# zed                                                                                                    #
 # ########################################################################################################
+ZED_DIR             = ~/.config/zed
+ZED_THEME_DIR       = ~/.config/zed/themes
+USER_ZED_CONF       = zed/settings.json
+LOCAL_ZED_CONF      = ~/.config/zed/settings.json
+USER_ZED_KEYMAP     = zed/keymap.json
+LOCAL_ZED_KEYMAP    = ~/.config/zed/keymap.json
+USER_ZED_THEME      = zed/themes/DoomOne.json
+LOCAL_ZED_THEME     = ~/.config/zed/themes/DoomOne.json
 
 # ########################################################################################################
 # makefile                                                                                               #
@@ -211,10 +219,10 @@ gdm :
 # dotfiles                                                                                               #
 # ########################################################################################################
 .PHONY : dotfiles fontconfig bash git niri foot \
-	waybar swaylock mako fuzzel desktop env ssh
+	waybar swaylock mako fuzzel desktop env ssh zed
 
 dotfiles : fontconfig bash git niri foot waybar \
-	swaylock mako fuzzel desktop env ssh
+	swaylock mako fuzzel desktop env ssh zed
 
 fontconfig : $(SYS_FONT_CONF)
 
@@ -356,3 +364,26 @@ $(SYS_SSH_CONF) : $(USER_SSH_CONF)
 	@$(OK) "ssh"
 
 $(USER_SSH_CONF) :
+
+zed : $(LOCAL_ZED_CONF) $(LOCAL_ZED_KEYMAP) $(LOCAL_ZED_THEME)
+
+$(LOCAL_ZED_CONF) : $(USER_ZED_CONF)
+	@$(MKDIR) $(ZED_DIR)
+	@$(CP) $(USER_ZED_CONF) $(LOCAL_ZED_CONF)
+	@$(OK) "zed conf"
+
+$(USER_ZED_CONF) :
+
+$(LOCAL_ZED_KEYMAP) : $(USER_ZED_KEYMAP)
+	@$(MKDIR) $(ZED_DIR)
+	@$(CP) $(USER_ZED_KEYMAP) $(LOCAL_ZED_KEYMAP)
+	@$(OK) "zed keymap"
+
+$(USER_ZED_KEYMAP) :
+
+$(LOCAL_ZED_THEME) : $(USER_ZED_THEME)
+	@$(MKDIR) $(ZED_THEME_DIR)
+	@$(CP) $(USER_ZED_THEME) $(LOCAL_ZED_THEME)
+	@$(OK) "zed theme"
+
+$(USER_ZED_THEME) :

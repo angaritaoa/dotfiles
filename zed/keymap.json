@@ -1,0 +1,86 @@
+// zed: open default keymap
+// dev: open key context  view
+[
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC p : Project
+  ///////////////////////////////////////////////////////////////////////////////////////
+  {
+    //"context": "Welcome || EmptyPane || (Editor && vim_mode == normal && !menu)",
+    "context": "Welcome || EmptyPane || Dock || (Editor && mode == full && vim_mode == normal && vim_operator == none && !menu)",
+    "bindings": {
+      "space p a": "workspace::Open", // Open project
+      "space p p": "projects::OpenRecent", // Switch project
+      "space p f": "file_finder::Toggle", // Search project files
+    },
+  },
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC b : Buffer
+  ///////////////////////////////////////////////////////////////////////////////////////
+  {
+    "context": "Editor && mode == full && vim_mode == normal && vim_operator == none && !menu",
+    "bindings": {
+      "space b n": "pane::ActivateNextItem", // Next buffer | Go to the next tab
+      "space b p": "pane::ActivatePreviousItem", // Previous buffer | Go to previous tab
+      "space b b": "tab_switcher::ToggleAll", // Switch buffer | Show all buffers
+      "space b d": "pane::CloseActiveItem", // Kill buffer | Close the buffer
+      "space b K": "pane::CloseAllItems", // Kill all buffer | Close all buffers
+      "space b O": "pane::CloseOtherItems", // Kill other buffers
+      "space b N": "workspace::NewFile", // New empty buffer | Create a new file in a new tab
+      //"space b r": ??? // Rename buffer
+      "space b s": "workspace::Save", // Save buffer | Save the current file
+      "space b S": "workspace::SaveAll", // Save all buffer | Save all open files
+    },
+  },
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC w : Windows
+  ///////////////////////////////////////////////////////////////////////////////////////
+  {
+    "context": "Editor && mode == full && vim_mode == normal && vim_operator == none && !menu",
+    "bindings": {
+      "space w h": "pane::SplitHorizontal",
+      "space w v": "pane::SplitVertical",
+      "space w left": "workspace::ActivatePaneLeft",
+      "space w right": "workspace::ActivatePaneRight",
+      "space w up": "workspace::ActivatePaneUp",
+      "space w down": "workspace::ActivatePaneDown",
+      "space w z": "workspace::ToggleZoom",
+      "space w d": "pane::CloseActiveItem",
+    },
+  },
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC e : Editor
+  ///////////////////////////////////////////////////////////////////////////////////////
+  {
+    "context": "Editor && mode == full && vim_mode == normal && vim_operator == none && !menu",
+    "bindings": {
+      "space e l": "go_to_line::Toggle",
+    },
+  },
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC c : Code
+  ///////////////////////////////////////////////////////////////////////////////////////
+  {
+    "context": "Editor && mode == full && vim_mode == normal && vim_operator == none && !menu",
+    "bindings": {
+      "space c l": "language_selector::Toggle", // Change Language Mode
+      "space c a": "editor::ToggleCodeActions",
+      "space c d": "editor::GoToDefinition",
+      "space c D": "editor::GoToDeclaration",
+      "space c i": "editor::GoToImplementation",
+      "space c s": "outline::Toggle",
+      "space c S": "project_symbols::Toggle",
+      "space c [": "editor::GoToDiagnostic",
+      "space c ]": "editor::GoToPreviousDiagnostic",
+      "space c e": "editor::Hover",
+    },
+  },
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC g : Git
+  ///////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC f : Files
+  ///////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // SPC h : Help
+  ///////////////////////////////////////////////////////////////////////////////////////
+]
