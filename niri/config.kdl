@@ -143,6 +143,7 @@ binds {
     Mod+F hotkey-overlay-title="Web Browser: Firefox" { spawn "firefox"; }
     Mod+Space hotkey-overlay-title="Run an Application: Rofi" { spawn "fuzzel"; }
     Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Shift+Alt+Print { spawn-sh "niri msg pick-color | wl-copy"; }
 
     //XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"; }
     XF86AudioRaiseVolume allow-when-locked=true {
