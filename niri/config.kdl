@@ -171,7 +171,6 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
-    
     Mod+O repeat=false { toggle-overview; } // Open/close the Overview: a zoomed-out view of workspaces and windows.
     Mod+Q repeat=false { close-window; }
 
