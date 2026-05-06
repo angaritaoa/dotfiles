@@ -22,10 +22,6 @@ output "DP-1" {
     backdrop-color "#282c34"
 }
 
-output "DP-2" {
-    off
-}
-
 layout {
     gaps 15
     center-focused-column "never"
@@ -73,8 +69,8 @@ screenshot-path null
 cursor {
     xcursor-theme "Adwaita"
     xcursor-size 32
-    hide-when-typing
-    hide-after-inactive-ms 2000
+    //hide-when-typing
+    //hide-after-inactive-ms 2000
 }
 
 animations {
@@ -104,14 +100,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"Nautilus$"#
-    match app-id=r#"drawing"#
-    open-floating true
-    default-column-width { proportion 0.3; }
-    default-window-height { proportion 0.3; }
-}
-
-window-rule {
     match app-id=r#"eyedropper"#
     open-floating true
     default-column-width { proportion 0.1; }
@@ -138,9 +126,9 @@ window-rule {
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+E hotkey-overlay-title="Text Editor: Emacs" { spawn "emacs"; }
-    Mod+T hotkey-overlay-title="Terminal: Foot" { spawn "foot"; }
-    Mod+F hotkey-overlay-title="Web Browser: Firefox" { spawn "firefox"; }
+    //Mod+E hotkey-overlay-title="Text Editor: Emacs" { spawn "emacs"; }
+    //Mod+T hotkey-overlay-title="Terminal: Foot" { spawn "foot"; }
+    //Mod+F hotkey-overlay-title="Web Browser: Firefox" { spawn "firefox"; }
     Mod+Space hotkey-overlay-title="Run an Application: Rofi" { spawn "fuzzel"; }
     Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Shift+Alt+Print { spawn-sh "niri msg pick-color | wl-copy"; }
@@ -224,11 +212,10 @@ binds {
     Mod+Period { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R { reset-window-height; }
-    Mod+Shift+F { fullscreen-window; }
-
-    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+F { maximize-column; }
+    //Mod+Shift+R { switch-preset-window-height; }
+    //Mod+Ctrl+R { reset-window-height; }
+    //Mod+Shift+F { fullscreen-window; }
 
     Mod+C { center-column; }
 

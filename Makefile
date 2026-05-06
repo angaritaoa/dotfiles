@@ -127,9 +127,9 @@ LOCAL_ZED_THEME     = ~/.config/zed/themes/DoomOne.json
 # ########################################################################################################
 # fedora                                                                                                 #
 # ########################################################################################################
-.PHONY : fedora packages user systemd fonts images icons gnome gdm
+.PHONY : fedora packages kernel user systemd fonts images icons gnome gdm
 
-fedora : packages user systemd fonts images icons gnome gdm
+fedora : packages kernel user systemd fonts images icons gnome gdm
 
 packages :
 	@sudo dnf install --assumeyes \
@@ -151,6 +151,13 @@ packages :
 		libva-v4l2-request libva-utils nvtop breeze-cursor-theme libheif-freeworld playerctl brightnessctl \
 		google-roboto-fonts google-roboto-mono-fonts jetbrains-mono-fonts adwaita-sans-fonts adwaita-mono-fonts \
 		dconf-editor ripgrep bat fd-find drawing pipewire-plugin-vulkan vulkan-tools
+
+kernel :
+	sudo grubby --update-kernel=ALL --args="ipv6.disable=1"
+	sudo grubby --update-kernel=ALL --args="i915.force_probe=\!7d55"
+	sudo grubby --update-kernel=ALL --args="xe.force_probe=7d55"
+	sudo grubby --update-kernel=ALL --args="video=DP-2:d"
+	sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 user :
 	@sudo usermod -a -G input angaritaoa
