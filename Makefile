@@ -154,8 +154,8 @@ packages :
 
 kernel :
 	sudo grubby --update-kernel=ALL --args="ipv6.disable=1"
-	sudo grubby --update-kernel=ALL --args="i915.force_probe=\!7d55"
-	sudo grubby --update-kernel=ALL --args="xe.force_probe=7d55"
+#	sudo grubby --update-kernel=ALL --args="i915.force_probe=\!7d55"
+#	sudo grubby --update-kernel=ALL --args="xe.force_probe=7d55"
 	sudo grubby --update-kernel=ALL --args="video=DP-2:d"
 	sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
