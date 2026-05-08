@@ -9,24 +9,21 @@
   "margin-left": 12,
   "margin-right": 12,
   "spacing": 4,
-  "modules-left": [
-    "niri/workspaces",
-    "wlr/taskbar",
-  ],
-  "modules-center": [
+  "modules-left": ["niri/workspaces", "wlr/taskbar"],
+  "modules-center": ["clock"],
+  "modules-right": [
     "keyboard-state",
     "idle_inhibitor",
     "wireplumber",
     "wireplumber#source",
-    "network"
+    "network",
   ],
-  "modules-right": ["clock"],
   "niri/workspaces": {
     "format": "{icon}",
     "format-icons": {
       "active": "●",
       "default": "●",
-    }
+    },
   },
   "wlr/taskbar": {
     "icon-size": 29,
@@ -38,20 +35,20 @@
     "numlock": false,
     "capslock": true,
     "format": "{icon}",
-      "format-icons": {
+    "format-icons": {
       "locked": "󰪛",
-      "unlocked": "󰪛"
-    }
+      "unlocked": "󰪛",
+    },
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "",
-      "deactivated": ""
+      "deactivated": "",
     },
     "tooltip": false,
-      "tooltip-format-activated": "Activado",
-      "tooltip-format-deactivated": "Desactivado",
+    "tooltip-format-activated": "Activado",
+    "tooltip-format-deactivated": "Desactivado",
   },
   "wireplumber": {
     "node-type": "Audio/Sink",
@@ -80,7 +77,7 @@
       "󰤟", // 20-40%
       "󰤢", // 40-60%
       "󰤥", // 60-80%
-      "󰤨"  // 80-100% (Llena)
+      "󰤨", // 80-100% (Llena)
     ],
   },
   "clock": {
