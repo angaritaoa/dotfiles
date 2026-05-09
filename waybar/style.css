@@ -9,77 +9,77 @@
 @define-color doom-cyan     #46d9ff;
 
 * {
-    font-family: "Adwaita Sans";
-    font-size: 21px;
+  font-family: "Adwaita Sans";
+  font-size: 21px;
 }
 
 window#waybar {
-    background-color: transparent;
-    color: @doom-fg;
-    transition-property: background-color;
-    transition-duration: 0.5s;
+  background-color: transparent;
+  color: @doom-fg;
+  transition-property: background-color;
+  transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+  opacity: 0.2;
 }
 
 tooltip {
-    background-color: @doom-bg;
-    border: 2px solid @doom-border;
-    border-radius: 8px;
+  background-color: @doom-bg;
+  border: 2px solid @doom-border;
+  border-radius: 8px;
 }
 
 tooltip label {
-    color: @doom-fg;
+  color: @doom-fg;
 }
 
 #workspaces,
 #taskbar,
-.modules-center {
-    background-color: @doom-bg;
-    border-radius: 20px;
-    padding: 1px 12px;
-    box-shadow: none;
+.modules-right {
+  background-color: @doom-bg;
+  border-radius: 20px;
+  padding: 1px 12px;
+  box-shadow: none;
 }
 
 #taskbar.empty {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 #workspaces button,
 #taskbar button {
-    border-radius: 20px;
-    padding: 0 12px;
-    margin: 0 1px;
-    background-color: transparent;
-    color: @doom-fg;
-    transition: all 0.3s ease;
-    box-shadow: none;
-    border: none;
+  border-radius: 20px;
+  padding: 0 12px;
+  margin: 0 1px;
+  background-color: transparent;
+  color: @doom-fg;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  border: none;
 }
 
 #workspaces button:hover {
-    background-color: transparent;
-    color: @doom-fg;
+  background-color: transparent;
+  color: @doom-fg;
 }
 
 #workspaces button.active {
-    background-color: transparent;
-    color: @doom-blue;
-    text-shadow: 0 0 5px rgba(81, 175, 239, 0.4);
+  background-color: transparent;
+  color: @doom-blue;
+  text-shadow: 0 0 5px rgba(81, 175, 239, 0.4);
 }
 
 #workspaces button.urgent {
-    background-color: transparent;
-    color: @doom-red;
+  background-color: transparent;
+  color: @doom-red;
 }
 
 #clock {
-    background-color: @doom-bg;
-    border-radius: 20px;
-    padding: 0px 24px;
-    box-shadow: none;
+  background-color: @doom-bg;
+  border-radius: 20px;
+  padding: 0px 24px;
+  box-shadow: none;
 }
 
 #keyboard-state,
@@ -87,28 +87,28 @@ tooltip label {
 #wireplumber,
 #wireplumber#source,
 #network {
-    padding: 0 12px;
-    color: @doom-fg;
+  padding: 0 12px;
+  color: @doom-fg;
 }
 
 #keyboard-state label.locked {
-    color: @doom-blue;
-    background: transparent;
+  color: @doom-blue;
+  background: transparent;
 }
 
 #idle_inhibitor.activated {
-    color: @doom-blue;
+  color: @doom-blue;
 }
 
 #wireplumber.sink-muted {
-    color: @doom-red;
+  color: @doom-red;
 }
 
 #wireplumber#source.source-muted {
-    color: @doom-red;
+  color: @doom-red;
 }
 
 #network.disconnected {
-    color: @doom-red;
-    font-size: 19px;
+  color: @doom-red;
+  font-size: 19px;
 }

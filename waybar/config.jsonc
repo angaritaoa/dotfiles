@@ -71,14 +71,7 @@
     "format-disconnected": "󰤮",
     "tooltip": true,
     "tooltip-format-wifi": "{essid}: {signalStrength}%",
-    //"on-click": "nm-connection-editor"
-    "format-icons": [
-      "󰤯", // 0-20% (Muy baja)
-      "󰤟", // 20-40%
-      "󰤢", // 40-60%
-      "󰤥", // 60-80%
-      "󰤨", // 80-100% (Llena)
-    ],
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
   },
   "clock": {
     "format": "{:%b %d %I:%M %p}",
