@@ -30,6 +30,7 @@ layout {
         proportion 0.5
         proportion 0.66667
     }
+    background-color "transparent"
     default-column-width { proportion 0.5; }
 
     focus-ring {
@@ -117,8 +118,6 @@ window-rule {
     // block-out-from "screencast"
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
