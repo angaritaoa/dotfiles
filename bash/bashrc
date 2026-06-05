@@ -1,12 +1,5 @@
 # ###################################################################################################
-# Source global definitions
-# ###################################################################################################
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
-
-# ###################################################################################################
-# Colores
+# colores
 # ###################################################################################################
 RESET=$(tput sgr0)
 BOLD=$(tput bold)
@@ -20,12 +13,48 @@ CYAN=$(tput setaf 6)
 WHITE=$(tput setaf 15)
 
 # ###################################################################################################
-# Variables de entorno generales
+# PS1
 # ###################################################################################################
 export PS1='● '
 
 # ###################################################################################################
-# Alias generales
+# Don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+# ###################################################################################################
+HISTCONTROL=ignoreboth
+
+# ###################################################################################################
+# Append to the history file, don't overwrite it
+# ###################################################################################################
+shopt -s histappend
+
+# ###################################################################################################
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# ###################################################################################################
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# ###################################################################################################
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+# ###################################################################################################
+shopt -s checkwinsize
+
+# ###################################################################################################
+# Enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+# ###################################################################################################
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# ###################################################################################################
+# alias
 # ###################################################################################################
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -39,17 +68,15 @@ alias free='free -ht'
 alias src='source ~/.bashrc'
 
 # ###################################################################################################
-# Alias para el comando ls
+# ls
 # ###################################################################################################
 
 alias lm='ls -ltrh  --color=always --time-style=long-iso --group-directories-first'
-alias lc='ls -ltrh  --color=always --time-style=long-iso --group-directories-first --time=creation'
 alias ls='ls -lSrh  --color=always --time-style=long-iso --group-directories-first'
-alias la='ls -ltrha --color=always --time-style=long-iso --group-directories-first'
 alias lt='tree --dirsfirst'
 
 # ###################################################################################################
-# Alias para el comando git
+# git
 # ###################################################################################################
 alias ga='git add .'
 alias gb='git branch -av'
@@ -57,3 +84,15 @@ alias gc='git commit -m'
 alias gp='git push'
 alias gf='git fetch'
 alias gs='git status'
+
+# ###################################################################################################
+# cd
+# ###################################################################################################
+alias cdprojects='cd /mnt/archivos/projects'
+alias cddotfiles='cd /mnt/archivos/projects/dotfiles'
+
+# ###################################################################################################
+# debian
+# ###################################################################################################
+alias update='sudo aptitude update'
+alias upgrade='sudo aptitude full-upgrade '

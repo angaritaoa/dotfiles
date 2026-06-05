@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Quit Niri
-Comment=Finaliza la sesión actual de Niri
-Exec=niri msg action quit
-Icon=system-log-out
-Terminal=false
-Categories=System;
-Keywords=logout;exit;salir;cerrar;
