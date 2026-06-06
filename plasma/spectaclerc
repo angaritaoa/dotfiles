@@ -1,9 +1,13 @@
 [ImageSave]
 imageFilenameTemplate=Captura_<yyyy><MM><dd>_<HH><mm><ss>
-imageSaveLocation=file:///home/angaritaoa/Pictures/Capturas
+imageSaveLocation=file:///home/angaritaoa/Imágenes/Capturas
+lastImageSaveLocation=file:///home/angaritaoa/Pictures/Capturas/Captura_20260605_213220.png
 translatedScreenshotsFolder=Capturas de pantalla
 
 [VideoSave]
 translatedScreencastsFolder=Videocapturas de pantalla
-videoFilenameTemplate=Videocaptura_<yyyy><MM><dd>_<HH><mm><ss>
-videoSaveLocation=file:///home/angaritaoa/Videos/Videocapturas/
+videoFilenameTemplate=VideoCaptura_<yyyy><MM><dd>_<HH><mm><ss>
+videoSaveLocation=file:///home/angaritaoa/Vídeos/Capturas
+
+[ViewerWindow]
+3938x2215 screen: Window-Maximized=true

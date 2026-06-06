@@ -6,6 +6,7 @@ RightButton;NoModifier=org.kde.contextmenu
 
 [Containments][1]
 ItemGeometries-2276x1280=
+ItemGeometries-3938x2215=
 ItemGeometriesHorizontal=
 activityId=d6c35c24-8783-4d2a-9335-04278989d624
 formfactor=0
@@ -45,11 +46,22 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][3][Applets][23][Configuration]
-popupHeight=400
-popupWidth=560
+popupHeight=451
+popupWidth=396
 
 [Containments][3][Applets][23][Configuration][Appearance]
-fontWeight=400
+boldText=true
+dateDisplayFormat=BelowTime
+firstDayOfWeek=1
+fontFamily=Lilex
+fontSize=11
+fontStyleName=Bold
+fontWeight=700
+use24hFormat=2
+
+[Containments][3][Applets][23][Configuration][ConfigDialog]
+DialogHeight=802
+DialogWidth=957
 
 [Containments][3][Applets][24]
 immutability=1
@@ -60,8 +72,8 @@ immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][3][Applets][4][Configuration]
-popupHeight=509
-popupWidth=649
+popupHeight=530
+popupWidth=697
 
 [Containments][3][Applets][4][Configuration][General]
 favoritesPortedToKAstats=true
@@ -132,6 +144,9 @@ plugin=org.kde.plasma.notifications
 immutability=1
 plugin=org.kde.plasma.networkmanagement
 
+[Containments][3][Applets][8][Applets][19][Configuration][General]
+currentDetailsTab=details
+
 [Containments][3][Applets][8][Applets][20]
 immutability=1
 plugin=org.kde.plasma.printmanager
@@ -155,6 +170,10 @@ plugin=org.kde.plasma.battery
 [Containments][3][Applets][8][Applets][27]
 immutability=1
 plugin=org.kde.plasma.brightness
+
+[Containments][3][Applets][8][Applets][28]
+immutability=1
+plugin=org.kde.plasma.mediacontroller
 
 [Containments][3][Applets][8][Applets][9]
 immutability=1
