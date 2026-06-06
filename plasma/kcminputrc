@@ -1,0 +1,6 @@
+[Keyboard]
+RepeatDelay=500
+RepeatRate=35
+
+[Libinput][5426][197][Razer Razer DeathAdder V3 HyperSpeed Mouse]
+PointerAccelerationProfile=1
