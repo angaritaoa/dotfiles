@@ -1,0 +1,28 @@
+[ContentDisplay]
+ElidingMode=Right
+
+[DetailsMode]
+ExpandableFolders=false
+HighlightEntireRow=false
+LeftPadding=0
+PreviewSize=16
+RightPadding=0
+
+[General]
+CloseSplitViewChoice=RightView
+RememberOpenedTabs=false
+RenameInline=false
+ShowSelectionToggle=false
+SortingChoice=CaseInsensitiveSorting
+Version=202
+ViewPropsTimestamp=2026,6,5,14,35,28.287
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,webarchivethumbnail,blenderthumbnail,cursorthumbnail,mobithumbnail,audiothumbnail,fontthumbnail,ffmpegthumbs,djvuthumbnail,gsthumbnail,rawthumbnail,directorythumbnail,kraorathumbnail,opendocumentthumbnail,windowsexethumbnail,glycin-heif,glycin-image-rs,glycin-jxl,librsvg,glycin-svg,imagethumbnail,windowsimagethumbnail,exrthumbnail,jpegthumbnail,svgthumbnail,comicbookthumbnail,ebookthumbnail

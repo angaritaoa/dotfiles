@@ -133,7 +133,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=224,64,251
 
 [General]
-ColorSchemeHash=9f63c7711a13123582e720791ea0f8c0172977d2
+BrowserApplication=google-chrome.desktop
+ColorSchemeHash=625c32ae46f33771aca7694ab0deae5a44bbf41c
 fixed=Lilex,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 font=Adwaita Sans,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 menuFont=Adwaita Sans,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
@@ -142,6 +143,7 @@ toolBarFont=Adwaita Sans,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [KDE]
 LookAndFeelPackage=com.github.vinceliuice.Layan
+ShowDeleteCommand=false
 SingleClick=true
 contrast=0
 frameContrast=0.2
@@ -160,8 +162,12 @@ Sort by=Name
 Sort directories first=true
 Sort hidden files last=false
 Sort reversed=false
-Speedbar Width=148
-View Style=DetailTree
+Speedbar Width=208
+View Style=Simple
+
+[PreviewSettings]
+EnableRemoteFolderThumbnail=false
+MaximumRemoteSize=0
 
 [WM]
 activeBackground=54,56,62
