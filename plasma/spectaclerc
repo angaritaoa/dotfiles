@@ -1,0 +1,9 @@
+[ImageSave]
+imageFilenameTemplate=Captura_<yyyy><MM><dd>_<HH><mm><ss>
+imageSaveLocation=file:///home/angaritaoa/Pictures/Capturas
+translatedScreenshotsFolder=Capturas de pantalla
+
+[VideoSave]
+translatedScreencastsFolder=Videocapturas de pantalla
+videoFilenameTemplate=Videocaptura_<yyyy><MM><dd>_<HH><mm><ss>
+videoSaveLocation=file:///home/angaritaoa/Videos/Videocapturas/

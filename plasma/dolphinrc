@@ -9,7 +9,6 @@ PreviewSize=16
 RightPadding=0
 
 [General]
-CloseSplitViewChoice=RightView
 RememberOpenedTabs=false
 RenameInline=false
 ShowSelectionToggle=false

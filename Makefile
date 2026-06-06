@@ -41,7 +41,7 @@ packages :
 	@sudo aptitude install --assume-yes ffmpeg mesa-utils-bin mesa-vulkan-drivers git git-lfs \
         tree 7zip xz-utils bash-completion vim intel-gpu-tools intel-media-va-driver-non-free \
         ripgrep fd-find rsync linux-headers-amd64 libinput-tools fonts-adwaita-sans inotify-tools \
-        qt-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes $(SILENT)
+        qt-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes tesseract-ocr-spa $(SILENT)
 	$(OKRULE)
 
 kernel :
