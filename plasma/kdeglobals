@@ -136,10 +136,10 @@ ForegroundVisited=224,64,251
 BrowserApplication=google-chrome.desktop
 ColorSchemeHash=625c32ae46f33771aca7694ab0deae5a44bbf41c
 fixed=Lilex,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-font=Adwaita Sans,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-menuFont=Adwaita Sans,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-smallestReadableFont=Adwaita Sans,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-toolBarFont=Adwaita Sans,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+font=Adwaita Sans,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Adwaita Sans,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Adwaita Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Adwaita Sans,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [KDE]
 LookAndFeelPackage=com.github.vinceliuice.Layan
@@ -172,7 +172,7 @@ MaximumRemoteSize=0
 [WM]
 activeBackground=54,56,62
 activeBlend=59,62,68
-activeFont=Adwaita Sans,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+activeFont=Adwaita Sans,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 activeForeground=221,221,221
 inactiveBackground=62,65,71
 inactiveBlend=67,71,77

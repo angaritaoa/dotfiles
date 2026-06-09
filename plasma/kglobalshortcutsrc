@@ -3,9 +3,10 @@ _k_friendly_name=Gestor de actividades
 switch-to-activity-d6c35c24-8783-4d2a-9335-04278989d624=none,none,Cambiar a la actividad «Por omisión»
 
 [KDE Keyboard Layout Switcher]
+Switch keyboard layout to Inglés (EE. UU. internacional con teclas muertas)=none,none,Cambiar la distribución de teclado a Inglés (EE. UU. internacional con teclas muertas)
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Cambiar a la última distribución de teclado usada
 Switch to Next Keyboard Layout=Meta+Alt+K,Meta+Alt+K,Cambiar a la siguiente distribución de teclado
-_k_friendly_name=Selector de distribución de teclado
+_k_friendly_name=Selector de distribución del teclado
 
 [kaccess]
 Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Activar o desactivar el lector de pantalla

@@ -6,6 +6,7 @@ RightButton;NoModifier=org.kde.contextmenu
 
 [Containments][1]
 ItemGeometries-2276x1280=
+ItemGeometries-3793x2133=
 ItemGeometries-3938x2215=
 ItemGeometriesHorizontal=
 activityId=d6c35c24-8783-4d2a-9335-04278989d624
@@ -85,6 +86,9 @@ plugin=org.kde.plasma.pager
 [Containments][3][Applets][6]
 immutability=1
 plugin=org.kde.plasma.icontasks
+
+[Containments][3][Applets][6][Configuration][General]
+launchers=applications:systemsettings.desktop,preferred://filemanager,applications:org.kde.konsole.desktop,preferred://browser
 
 [Containments][3][Applets][7]
 immutability=1
