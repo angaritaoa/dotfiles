@@ -13,6 +13,12 @@ make
 
 ## inotify
 
-```
+```bash
 inotifywait -m -e modify,create,move --format '%w%f -> %e' ~/.config/
+```
+
+## dconf
+
+```bash
+dconf watch /
 ```
