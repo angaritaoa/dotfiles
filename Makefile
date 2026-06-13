@@ -80,9 +80,9 @@ gnome :
 	@gsettings set org.gnome.desktop.interface font-hinting 'slight'
 	@gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 10'
 	@gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
-	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Light'
-	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 10'
+	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 11'
 	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
 	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
 	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10'
@@ -116,7 +116,7 @@ gdm :
 terminal :
 	@gsettings set com.raggesilver.BlackBox cursor-shape 1
 	@gsettings set com.raggesilver.BlackBox easy-copy-paste true
-	@gsettings set com.raggesilver.BlackBox font 'Lilex 10'
+	@gsettings set com.raggesilver.BlackBox font 'Lilex 11'
 	@gsettings set com.raggesilver.BlackBox remember-window-size true
 	@gsettings set com.raggesilver.BlackBox show-headerbar false
 	@gsettings set com.raggesilver.BlackBox terminal-bell false
@@ -127,6 +127,7 @@ terminal :
 nautilus :
 	@gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
 	@gsettings set org.gnome.nautilus.preferences click-policy 'single'
+	$(OKRULE)
 
 # ########################################################################################################
 # fontconfig                                                                                             #

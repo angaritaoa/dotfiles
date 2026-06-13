@@ -1,16 +1,17 @@
-''' para buscar una acción :actionlist <search>
+" buscar una acción :actionlist <search>
 set multiple-cursors
 set showmode
+set incsearch
 let mapleader=" "
 
-''' project
+" project
 map <leader>pc <Action>(GotoClass)
 map <leader>pf <Action>(GotoFile)
 map <leader>ps <Action>(GotoSymbol)
 map <leader>pa <Action>(GotoAction)
 map <leader>pb <Action>(RecentChangedFiles)
 
-''' file
+" file
 map <leader>bs <Action>(SaveAll)
 map <leader>bk <Action>(CloseContent)
 map <leader>ba <Action>(CloseAllEditors)
@@ -18,7 +19,7 @@ map <leader>bp <Action>(Back)
 map <leader>bn <Action>(Forward)
 map <leader>bb <Action>(RecentChangedFiles)
 
-''' window
+" window
 map <leader>wh <Action>(MoveTabRight)
 map <leader>ws <Action>(MoveTabDown)
 map <leader>wn <Action>(NextSplitter)
@@ -26,7 +27,7 @@ map <leader>wp <Action>(PrevSplitter)
 map <leader>wd <Action>(Unsplit)
 map <leader>wa <Action>(UnsplitAll)
 
-''' code
+" code
 map <leader>ca <Action>(ShowIntentionActions)
 map <leader>ci <Action>(GotoImplementation)
 map <leader>cg <Action>(Generate)
