@@ -99,7 +99,7 @@ gnome :
 	@gsettings set org.gnome.shell last-selected-power-profile 'performance'
 	@gsettings set org.gnome.desktop.search-providers disabled "['org.gnome.Software.desktop']"
 	@gsettings set org.gnome.desktop.input-sources mru-sources "[('xkb', 'us')]"
-	@gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+intl')]"
+	@gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+altgr-intl')]"
 	@gsettings set org.gnome.desktop.calendar week-start-day 'monday'
 	@gsettings set org.gnome.desktop.interface clock-show-weekday true
 	@gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -114,8 +114,9 @@ gdm :
 	$(OKRULE)
 
 terminal :
-	@gsettings set com.raggesilver.BlackBox cursor-shape 1
-	@gsettings set com.raggesilver.BlackBox easy-copy-paste true
+	@gsettings set com.raggesilver.BlackBox cursor-shape 0
+	@gsettings set com.raggesilver.BlackBox cursor-blink-mode 2
+	@gsettings set com.raggesilver.BlackBox easy-copy-paste false
 	@gsettings set com.raggesilver.BlackBox font 'Lilex 11'
 	@gsettings set com.raggesilver.BlackBox remember-window-size true
 	@gsettings set com.raggesilver.BlackBox show-headerbar false
