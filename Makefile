@@ -23,7 +23,7 @@ OKRULE = @echo "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)"
 # ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
-RULESDOT := fontconfig bash git env aptitude
+RULESDOT := fontconfig bash environment git aptitude
 .PHONY : dotfiles $(RULESDOT)
 dotfiles : $(RULESDOT)
 
@@ -42,11 +42,12 @@ packages :
         tree 7zip xz-utils bash-completion vim intel-gpu-tools intel-media-va-driver-non-free \
         ripgrep fd-find rsync linux-headers-amd64 libinput-tools fonts-adwaita-sans inotify-tools \
         xdg-user-dirs gnome-tweaks breeze-cursor-theme dconf-editor blackbox-terminal \
-        blackbox-themes $(SILENT)
+        blackbox-themes neovim $(SILENT)
 	$(OKRULE)
 
 kernel :
-	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 quiet"/' /etc/default/grub $(SILENT)
+#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 quiet"/' /etc/default/grub $(SILENT)
+	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d"/' /etc/default/grub $(SILENT)
 	@sudo update-grub $(SILENT)
 	$(OKRULE)
 
@@ -119,10 +120,12 @@ terminal :
 	@gsettings set com.raggesilver.BlackBox easy-copy-paste false
 	@gsettings set com.raggesilver.BlackBox font 'Lilex 11'
 	@gsettings set com.raggesilver.BlackBox remember-window-size true
-	@gsettings set com.raggesilver.BlackBox show-headerbar false
+	@gsettings set com.raggesilver.BlackBox show-headerbar true
 	@gsettings set com.raggesilver.BlackBox terminal-bell false
 	@gsettings set com.raggesilver.BlackBox terminal-padding "(10, 10, 10, 10)"
 	@gsettings set com.raggesilver.BlackBox theme-dark 'Adwaita Dark'
+	@gsettings set com.raggesilver.BlackBox fill-tabs false	
+	@gsettings set com.raggesilver.BlackBox context-aware-header-bar false
 	$(OKRULE)
 
 nautilus :
@@ -153,6 +156,17 @@ $(SYS_BASH_RC) : $(USER_BASH_RC)
 	$(OKRULE)
 
 # ########################################################################################################
+# environment                                                                                            #
+# ########################################################################################################
+USR_ENV_RC       := bash/profile
+SYS_ENV_RC       := ~/.profile
+environment : $(SYS_ENV_RC)
+
+$(SYS_ENV_RC) : $(USR_ENV_RC)
+	@cp -f $< $@ $(SILENT)
+	$(OKRULE)
+
+# ########################################################################################################
 # git                                                                                                    #
 # ########################################################################################################
 USER_GIT_CONF := git/gitconfig
@@ -176,18 +190,6 @@ $(SYS_GIT_SSH) : $(USER_GIT_SSH)
 
 $(SYS_SSH_CONF) : $(USER_SSH_CONF)
 	@mkdir -p ~/.ssh $(SILENT)
-	@cp -f $< $@ $(SILENT)
-	$(OKRULE)
-
-# ########################################################################################################
-# env                                                                                                    #
-# ########################################################################################################
-USER_ENV_CONF := systemd/user_env.conf
-SYS_ENV_CONF  := ~/.config/environment.d/user_env.conf
-env : $(SYS_ENV_CONF)
-
-$(SYS_ENV_CONF) : $(USER_ENV_CONF)
-	@mkdir -p $(dir $@) $(SILENT)
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
 
