@@ -23,7 +23,7 @@ OKRULE = @echo "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)"
 # ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
-RULESDOT := fontconfig bash environment git aptitude
+RULESDOT := fontconfig bash environment git nvim aptitude
 .PHONY : dotfiles $(RULESDOT)
 dotfiles : $(RULESDOT)
 
@@ -190,6 +190,17 @@ $(SYS_GIT_SSH) : $(USER_GIT_SSH)
 
 $(SYS_SSH_CONF) : $(USER_SSH_CONF)
 	@mkdir -p ~/.ssh $(SILENT)
+	@cp -f $< $@ $(SILENT)
+	$(OKRULE)
+
+# ########################################################################################################
+# neovim                                                                                                 #
+# ########################################################################################################
+USR_NVIM_LUA      := nvim/init.lua
+SYS_NVIM_LUA      := ~/.config/nvim/init.lua
+nvim : $(SYS_NVIM_LUA)
+
+$(SYS_NVIM_LUA) : $(USR_NVIM_LUA)
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
 
