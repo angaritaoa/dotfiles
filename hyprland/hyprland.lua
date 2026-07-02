@@ -61,9 +61,9 @@ hl.config({
     general = {
         gaps_in          = 5,
         gaps_out         = 20,
-        border_size      = 2,
+        border_size      = 1,
         col              = {
-            active_border = "#51afef",
+            active_border = "#3d4451",
             inactive_border = "#3d4451",
         },
 
@@ -168,7 +168,8 @@ hl.config({
 -- ########################################################################################################
 hl.config({
     input = {
-        kb_layout      = "us(intl)",
+        kb_layout      = "us",
+        kb_variant     = "altgr-intl",
         repeat_rate    = 35,
         repeat_delay   = 500,
 
