@@ -23,14 +23,14 @@ OKRULE = @echo "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)"
 # ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
-RULESDOT := fontconfig bash kitty git env hyprland flameshot waybar aptitude
+RULESDOT := fontconfig bash profile kitty env git hyprland flameshot waybar nvim aptitude
 .PHONY : dotfiles $(RULESDOT)
 dotfiles : $(RULESDOT)
 
 # ########################################################################################################
 # debian                                                                                                 #
 # ########################################################################################################
-RULESDEB := packages kernel user systemd fonts images gnome gdm vicinae
+RULESDEB := packages kernel user systemd fonts images icons vicinae gnome gdm nautilus
 .PHONY : debian $(RULESDEB)
 debian : $(RULESDEB)
 
@@ -38,21 +38,24 @@ packages :
 	@sudo apt install -y aptitude $(SILENT)
 	@sudo aptitude update $(SILENT)
 	@sudo aptitude full-upgrade --assume-yes $(SILENT)
-	@sudo aptitude install --assume-yes ffmpeg mesa-utils-bin mesa-vulkan-drivers curl git git-lfs \
-        tree 7zip xz-utils bash-completion gnome-tweaks vim hyprland hyprland-guiutils foot waybar fuzzel \
-        pipewire-v4l2 v4l2loopback-dkms v4l2loopback-utils intel-gpu-tools intel-media-va-driver-non-free \
-        playerctl ripgrep fd-find papirus-icon-theme hyprpolkitagent rsync linux-headers-amd64 wl-clipboard \
-        libinput-tools hyprpaper hypridle hyprlock hyprpolkitagent hyprshutdown flameshot mako-notifier \
-        gradia $(SILENT)
+	@sudo aptitude install --assume-yes ffmpeg mesa-utils-bin mesa-vulkan-drivers git git-lfs \
+        tree 7zip xz-utils bash-completion vim intel-gpu-tools intel-media-va-driver-non-free \
+        ripgrep fd-find rsync linux-headers-amd64 libinput-tools fonts-adwaita-sans inotify-tools \
+        xdg-user-dirs gnome-tweaks breeze-cursor-theme dconf-editor hyprland hyprland-guiutils \
+        neovim waybar playerctl hyprpolkitagent hyprshutdown flameshot mako-notifier chromium \
+        gdm3 nautilus kitty hyprcursor-util hypridle hyprlock hyprpaper hyprpicker hyprsunset \
+		xdg-desktop-portal-hyprland $(SILENT)
 	$(OKRULE)
 
 kernel :
-	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 quiet"/' /etc/default/grub $(SILENT)
+	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d"/' /etc/default/grub $(SILENT)
+#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 quiet"/' /etc/default/grub $(SILENT)
 	@sudo update-grub $(SILENT)
 	$(OKRULE)
 
 user :
 	@sudo usermod -a -G input angaritaoa $(SILENT)
+	@xdg-user-dirs-update $(SILENT)
 	$(OKRULE)
 
 systemd :
@@ -77,30 +80,48 @@ images :
 	@cp -f /mnt/archivos/config/images/* ~/.config/backgrounds $(SILENT)
 	$(OKRULE)
 
+icons :
+	@ssh-add /mnt/archivos/config/ssh/github $(SILENT)
+	@git clone https://github.com/vinceliuice/Tela-icon-theme.git $(SILENT)
+	@$(shell pwd)/Tela-icon-theme/install.sh $(SILENT)
+	@rm -rf Tela-icon-theme $(SILENT)
+	$(OKRULE)
+
+vicinae :
+	@curl -fsSL https://vicinae.com/install | bash -s -- --prefix ~/.local $(SILENT)
+	$(OKRULE)
+
 gnome :
-	@gsettings set org.gnome.desktop.interface clock-format '24h' $(SILENT)
-	@gsettings set org.gnome.desktop.interface cursor-blink true $(SILENT)
-	@gsettings set org.gnome.desktop.interface document-font-name 'Adwaita Sans 10' $(SILENT)
-	@gsettings set org.gnome.desktop.interface font-antialiasing 'rgba' $(SILENT)
-	@gsettings set org.gnome.desktop.interface font-hinting 'slight' $(SILENT)
-	@gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 10' $(SILENT)
-	@gsettings set org.gnome.desktop.interface font-rgba-order 'rgb' $(SILENT)
-	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' $(SILENT)
-	@gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Light' $(SILENT)
-	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 9' $(SILENT)
-	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.3 $(SILENT)
-	@gsettings set org.gnome.desktop.interface toolkit-accessibility false $(SILENT)
-	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10' $(SILENT)
-	@gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:close' $(SILENT)
-	@gsettings set org.gnome.desktop.interface enable-animations true $(SILENT)
-	@gsettings set org.gnome.desktop.interface clock-show-date true $(SILENT)
-	@gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat' $(SILENT)
-	@gsettings set org.gnome.desktop.peripherals.mouse speed 0.0 $(SILENT)
-	@gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true $(SILENT)
-	@gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' $(SILENT)
-	@gsettings set org.gnome.desktop.interface cursor-size 24 $(SILENT)
-	@gsettings set org.gnome.desktop.interface icon-theme 'Tela' $(SILENT)
-	@gsettings set org.gnome.desktop.wm.preferences audible-bell false $(SILENT)
+	@gsettings set org.gnome.desktop.interface clock-format '12h'
+	@gsettings set org.gnome.desktop.interface cursor-blink true
+	@gsettings set org.gnome.desktop.interface document-font-name 'Adwaita Sans 10'
+	@gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
+	@gsettings set org.gnome.desktop.interface font-hinting 'slight'
+	@gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 10'
+	@gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
+	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+	@gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Light'
+	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 11'
+	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
+	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
+	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10'
+	@gsettings set org.gnome.desktop.wm.preferences button-layout 'menu:minimize,maximize,close'
+	@gsettings set org.gnome.desktop.interface enable-animations true
+	@gsettings set org.gnome.desktop.interface clock-show-date true
+	@gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
+	@gsettings set org.gnome.desktop.peripherals.mouse speed 0.0
+	@gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+	@gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+	@gsettings set org.gnome.desktop.interface cursor-size 24
+	@gsettings set org.gnome.desktop.interface icon-theme 'Tela'
+	@gsettings set org.gnome.desktop.wm.preferences audible-bell false
+	@gsettings set org.gnome.shell last-selected-power-profile 'performance'
+	@gsettings set org.gnome.desktop.search-providers disabled "['org.gnome.Software.desktop']"
+	@gsettings set org.gnome.desktop.input-sources mru-sources "[('xkb', 'us')]"
+	@gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+altgr-intl')]"
+	@gsettings set org.gnome.desktop.calendar week-start-day 'monday'
+	@gsettings set org.gnome.desktop.interface clock-show-weekday true
+	@gsettings set org.gnome.desktop.calendar show-weekdate true
 	$(OKRULE)
 
 gdm :
@@ -111,8 +132,9 @@ gdm :
 	@sudo dconf update $(SILENT)
 	$(OKRULE)
 
-vicinae :
-	@curl -fsSL https://vicinae.com/install | bash -s -- --prefix ~/.local $(SILENT)
+nautilus :
+	@gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
+	@gsettings set org.gnome.nautilus.preferences click-policy 'single'
 	$(OKRULE)
 
 # ########################################################################################################
@@ -138,6 +160,17 @@ $(SYS_BASH_RC) : $(USER_BASH_RC)
 	$(OKRULE)
 
 # ########################################################################################################
+# profile                                                                                                #
+# ########################################################################################################
+USR_ENV_RC       := bash/profile
+SYS_ENV_RC       := ~/.profile
+profile : $(SYS_ENV_RC)
+
+$(SYS_ENV_RC) : $(USR_ENV_RC)
+	@cp -f $< $@ $(SILENT)
+	$(OKRULE)
+
+# ########################################################################################################
 # kitty                                                                                                  #
 # ########################################################################################################
 USER_KITTY_CONF := kitty/kitty.conf
@@ -145,6 +178,18 @@ SYS_KITTY_CONF  := ~/.config/kitty/kitty.conf
 kitty : $(SYS_KITTY_CONF)
 
 $(SYS_KITTY_CONF) : $(USER_KITTY_CONF)
+	@mkdir -p $(dir $@) $(SILENT)
+	@cp -f $< $@ $(SILENT)
+	$(OKRULE)
+
+# ########################################################################################################
+# env                                                                                                    #
+# ########################################################################################################
+USER_ENV_CONF := systemd/user_env.conf
+SYS_ENV_CONF  := ~/.config/environment.d/user_env.conf
+env : $(SYS_ENV_CONF)
+
+$(SYS_ENV_CONF) : $(USER_ENV_CONF)
 	@mkdir -p $(dir $@) $(SILENT)
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
@@ -165,21 +210,25 @@ $(SYS_GIT_CONF) : $(USER_GIT_CONF)
 	$(OKRULE)
 
 $(SYS_GIT_SSH) : $(USER_GIT_SSH)
+	@mkdir -p ~/.ssh $(SILENT)
 	@cp -f $< $@ $(SILENT)
+	@chmod 700 ~/.ssh $(SILENT)
+	@chmod 600 $@ $(SILENT)
 	$(OKRULE)
 
 $(SYS_SSH_CONF) : $(USER_SSH_CONF)
+	@mkdir -p ~/.ssh $(SILENT)
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
 
 # ########################################################################################################
-# env                                                                                                    #
+# neovim                                                                                                 #
 # ########################################################################################################
-USER_ENV_CONF := systemd/user_env.conf
-SYS_ENV_CONF  := ~/.config/environment.d/user_env.conf
-env : $(SYS_ENV_CONF)
+USR_NVIM_LUA      := nvim/init.lua
+SYS_NVIM_LUA      := ~/.config/nvim/init.lua
+nvim : $(SYS_NVIM_LUA)
 
-$(SYS_ENV_CONF) : $(USER_ENV_CONF)
+$(SYS_NVIM_LUA) : $(USR_NVIM_LUA)
 	@mkdir -p $(dir $@) $(SILENT)
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
@@ -211,7 +260,7 @@ $(SYS_FLAMESHOT_CONF) : $(USER_FLAMESHOT_CONF)
 	$(OKRULE)
 
 # ########################################################################################################
-# hyprland                                                                                               #
+# waybar                                                                                                 #
 # ########################################################################################################
 SRC_WAYBAR_DIR := waybar
 DES_WAYBAR_DIR := ~/.config/waybar

@@ -23,33 +23,32 @@ OKRULE = @echo "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)"
 # ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
-RULESDOT := fontconfig bash profile kitty env git hyprland flameshot waybar nvim aptitude
+RULESDOT := fontconfig bash profile kitty env git hyprland flameshot waybar nvim
 .PHONY : dotfiles $(RULESDOT)
 dotfiles : $(RULESDOT)
 
 # ########################################################################################################
-# debian                                                                                                 #
+# archlinux                                                                                              #
 # ########################################################################################################
-RULESDEB := packages kernel user systemd fonts images icons vicinae gnome gdm nautilus terminal
-.PHONY : debian $(RULESDEB)
-debian : $(RULESDEB)
+RULESARCH := packages kernel user systemd fonts images icons vicinae gnome gdm nautilus
+.PHONY : arch $(RULESARCH)
+arch : $(RULESARCH)
 
 packages :
-	@sudo apt install -y aptitude $(SILENT)
-	@sudo aptitude update $(SILENT)
-	@sudo aptitude full-upgrade --assume-yes $(SILENT)
-	@sudo aptitude install --assume-yes ffmpeg mesa-utils-bin mesa-vulkan-drivers git git-lfs \
-        tree 7zip xz-utils bash-completion vim intel-gpu-tools intel-media-va-driver-non-free \
-        ripgrep fd-find rsync linux-headers-amd64 libinput-tools fonts-adwaita-sans inotify-tools \
-        xdg-user-dirs gnome-tweaks breeze-cursor-theme dconf-editor hyprland hyprland-guiutils \
-        neovim waybar playerctl hyprpolkitagent hyprshutdown flameshot mako-notifier chromium \
-        gdm3 nautilus kitty hyprcursor-util hypridle hyprlock hyprpaper hyprpicker hyprsunset \
-		xdg-desktop-portal-hyprland blackbox-terminal blackbox-themes libva-wayland2 vainfo $(SILENT)
+	@sudo pacman -Syu $(SILENT)
+	@sudo pacman -S ffmpeg mesa mesa-utils vulkan-intel vulkan-mesa-layers git git-lfs \
+        tree 7zip xz bash-completion intel-gpu-tools intel-media-driver hyprshot firefox \
+        ripgrep fd rsync linux-headers libinput-tools adwaita-fonts inotify-tools \
+        xdg-user-dirs gnome-tweaks breeze-cursors dconf-editor hyprland hyprland-guiutils \
+        neovim waybar playerctl hyprpolkitagent hyprshutdown flameshot mako chromium \
+        gdm nautilus kitty hyprcursor hypridle hyprlock hyprpaper hyprpicker hyprsunset \
+		xdg-desktop-portal-hyprland ttf-jetbrains-mono ttf-jetbrains-mono-nerd \
+		ttf-adwaitamono-nerd otf-monaspace-nerdfonts $(SILENT)
 	$(OKRULE)
 
 kernel :
 	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d"/' /etc/default/grub $(SILENT)
-	@sudo update-grub $(SILENT)
+	@sudo grub-mkconfig -o /boot/efi/EFI/arch/grub.cfg $(SILENT)
 	$(OKRULE)
 
 user :
@@ -64,11 +63,6 @@ systemd :
 
 fonts :
 	@sudo cp -fR /mnt/archivos/config/fonts/Windows /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/JetBrainsMonoNerd /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/JetBrainsMono /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/RobotoMonoNerd /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/GeistMonoNerd /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/AdwaitaMonoNerd /usr/share/fonts $(SILENT)
 	@sudo cp -fR /mnt/archivos/config/fonts/NerdFontsSymbols /usr/share/fonts $(SILENT)
 	@sudo cp -fR /mnt/archivos/config/fonts/Lilex /usr/share/fonts $(SILENT)
 	@sudo fc-cache -r $(SILENT)
@@ -134,19 +128,6 @@ gdm :
 nautilus :
 	@gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
 	@gsettings set org.gnome.nautilus.preferences click-policy 'single'
-	$(OKRULE)
-
-terminal :
-	@gsettings set com.raggesilver.BlackBox context-aware-header-bar false
-	@gsettings set com.raggesilver.BlackBox cursor-blink-mode 0
-	@gsettings set com.raggesilver.BlackBox fill-tabs false
-	@gsettings set com.raggesilver.BlackBox font 'Lilex 11'
-	@gsettings set com.raggesilver.BlackBox notify-process-completion false
-	@gsettings set com.raggesilver.BlackBox remember-window-size true
-	@gsettings set com.raggesilver.BlackBox show-headerbar true
-	@gsettings set com.raggesilver.BlackBox show-menu-button false
-	@gsettings set com.raggesilver.BlackBox terminal-bell false
-	@gsettings set com.raggesilver.BlackBox terminal-padding "(8, 8, 8, 8)"
 	$(OKRULE)
 
 # ########################################################################################################
@@ -285,13 +266,3 @@ $(DES_WAYBAR_DIR)/% : $(SRC_WAYBAR_DIR)/%
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
 
-# ########################################################################################################
-# aptitude                                                                                               #
-# ########################################################################################################
-USR_APT_CONF = aptitude/apt.conf
-SYS_APT_CONF = /etc/apt/apt.conf
-aptitude : $(SYS_APT_CONF)
-
-$(SYS_APT_CONF) : $(USR_APT_CONF)
-	@sudo cp -f $< $@ $(SILENT)
-	$(OKRULE)

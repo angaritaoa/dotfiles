@@ -6,8 +6,7 @@ hl.monitor({
     output   = "DP-1",
     mode     = "5120x2880@60.00000",
     position = "auto",
-    scale    = "1",
-    cm       = "dp3"
+    scale    = "1"
 })
 
 -- ########################################################################################################
@@ -22,7 +21,6 @@ local menu        = "vicinae toggle"
 -- ########################################################################################################
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 hl.on("hyprland.start", function()
-    --hl.exec_cmd("waybar & hyprpaper & firefox")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("waybar")
     hl.exec_cmd("vicinae server")
@@ -35,6 +33,8 @@ end)
 -- # Env                                                                                                  #
 -- ########################################################################################################
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+hl.env("XCURSOR_THEME", "Breeze_Light")
+hl.env("HYPRCURSOR_THEME", "Breeze_Light")
 hl.env("XCURSOR_SIZE", "32")
 hl.env("HYPRCURSOR_SIZE", "32")
 
@@ -59,7 +59,7 @@ hl.env("HYPRCURSOR_SIZE", "32")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in          = 5,
+        gaps_in          = 10,
         gaps_out         = 20,
         border_size      = 1,
         col              = {
@@ -68,7 +68,7 @@ hl.config({
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false,
+        resize_on_border = true,
 
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing    = false,
@@ -83,15 +83,15 @@ hl.config({
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
 
-        shadow           = {
-            enabled      = true,
+        shadow = {
+            enabled      = false,
             range        = 15,
             render_power = 3,
             color        = "rgba(0, 0, 0, 0.50)",
         },
 
-        blur             = {
-            enabled  = true,
+        blur = {
+            enabled  = false,
             size     = 3,
             passes   = 1,
             vibrancy = 0.1696,
@@ -173,11 +173,10 @@ hl.config({
         repeat_rate    = 35,
         repeat_delay   = 500,
 
-        follow_mouse   = false,
+        follow_mouse   = true,
         accel_profile  = "flat",
-        sensitivity    = 0.0, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity    = 0.0,
         force_no_accel = false,
-        --no_hardware_cursors = false,
     },
 })
 
