@@ -2,6 +2,8 @@
 set multiple-cursors
 set showmode
 set incsearch
+set relativenumber
+set number
 let mapleader=" "
 
 " project
