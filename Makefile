@@ -63,12 +63,7 @@ systemd :
 	$(OKRULE)
 
 fonts :
-	@sudo cp -fR /mnt/archivos/config/fonts/Windows /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/JetBrainsMonoNerd /usr/share/fonts $(SILENT)
 	@sudo cp -fR /mnt/archivos/config/fonts/JetBrainsMono /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/RobotoMonoNerd /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/GeistMonoNerd /usr/share/fonts $(SILENT)
-	@sudo cp -fR /mnt/archivos/config/fonts/AdwaitaMonoNerd /usr/share/fonts $(SILENT)
 	@sudo cp -fR /mnt/archivos/config/fonts/NerdFontsSymbols /usr/share/fonts $(SILENT)
 	@sudo cp -fR /mnt/archivos/config/fonts/Lilex /usr/share/fonts $(SILENT)
 	@sudo fc-cache -r $(SILENT)
