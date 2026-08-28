@@ -1,5 +1,5 @@
 SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
-JAVA_HOME=/mnt/archivos/software/graalvm/current
+JAVA_HOME=/mnt/archivos/software/java/current
 GRADLE_HOME=/mnt/archivos/software/gradle/current
 PATH=~/.local/bin:$PATH
 PATH=$JAVA_HOME/bin:$PATH

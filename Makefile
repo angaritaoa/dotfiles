@@ -23,14 +23,14 @@ OKRULE = @echo "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)"
 # ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
-RULESDOT := fontconfig bash profile kitty env git hyprland flameshot waybar nvim aptitude
+RULESDOT := fontconfig bash profile env git flameshot nvim aptitude
 .PHONY : dotfiles $(RULESDOT)
 dotfiles : $(RULESDOT)
 
 # ########################################################################################################
 # debian                                                                                                 #
 # ########################################################################################################
-RULESDEB := packages kernel user systemd fonts images icons vicinae gnome gdm nautilus terminal
+RULESDEB := packages kernel user systemd fonts gnome gdm nautilus terminal
 .PHONY : debian $(RULESDEB)
 debian : $(RULESDEB)
 
@@ -41,14 +41,13 @@ packages :
 	@sudo aptitude install --assume-yes ffmpeg mesa-utils-bin mesa-vulkan-drivers git git-lfs \
         tree 7zip xz-utils bash-completion vim intel-gpu-tools intel-media-va-driver-non-free \
         ripgrep fd-find rsync linux-headers-amd64 libinput-tools fonts-adwaita-sans inotify-tools \
-        xdg-user-dirs gnome-tweaks breeze-cursor-theme dconf-editor hyprland hyprland-guiutils \
-        neovim waybar playerctl hyprpolkitagent hyprshutdown flameshot mako-notifier chromium \
-        gdm3 nautilus kitty hyprcursor-util hypridle hyprlock hyprpaper hyprpicker hyprsunset \
-		xdg-desktop-portal-hyprland blackbox-terminal blackbox-themes libva-wayland2 vainfo $(SILENT)
+        xdg-user-dirs gnome-tweaks breeze-cursor-theme dconf-editor neovim flameshot blackbox-terminal \
+	blackbox-themes libva-wayland2 vainfo papirus-icon-theme $(SILENT)
 	$(OKRULE)
 
 kernel :
-	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d"/' /etc/default/grub $(SILENT)
+	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 xe.enable_psr=0 quiet"/' /etc/default/grub $(SILENT)
+#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.enable_psr=0"/' /etc/default/grub $(SILENT)
 	@sudo update-grub $(SILENT)
 	$(OKRULE)
 
@@ -59,7 +58,6 @@ user :
 
 systemd :
 	@systemctl --user enable --now ssh-agent.socket $(SILENT)
-	@systemctl --user enable --now hyprpolkitagent.service $(SILENT)
 	$(OKRULE)
 
 fonts :
@@ -67,22 +65,6 @@ fonts :
 	@sudo cp -fR /mnt/archivos/config/fonts/NerdFontsSymbols /usr/share/fonts $(SILENT)
 	@sudo cp -fR /mnt/archivos/config/fonts/Lilex /usr/share/fonts $(SILENT)
 	@sudo fc-cache -r $(SILENT)
-	$(OKRULE)
-
-images :
-	@mkdir -p ~/.config/backgrounds $(SILENT)
-	@cp -f /mnt/archivos/config/images/* ~/.config/backgrounds $(SILENT)
-	$(OKRULE)
-
-icons :
-	@ssh-add /mnt/archivos/config/ssh/github $(SILENT)
-	@git clone https://github.com/vinceliuice/Tela-icon-theme.git $(SILENT)
-	@$(shell pwd)/Tela-icon-theme/install.sh $(SILENT)
-	@rm -rf Tela-icon-theme $(SILENT)
-	$(OKRULE)
-
-vicinae :
-	@curl -fsSL https://vicinae.com/install | bash -s -- --prefix ~/.local $(SILENT)
 	$(OKRULE)
 
 gnome :
@@ -96,7 +78,7 @@ gnome :
 	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Light'
 	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 11'
-	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
 	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
 	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10'
 	@gsettings set org.gnome.desktop.wm.preferences button-layout 'menu:minimize,maximize,close'
@@ -106,8 +88,8 @@ gnome :
 	@gsettings set org.gnome.desktop.peripherals.mouse speed 0.0
 	@gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
 	@gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-	@gsettings set org.gnome.desktop.interface cursor-size 24
-	@gsettings set org.gnome.desktop.interface icon-theme 'Tela'
+	@gsettings set org.gnome.desktop.interface cursor-size 32
+	@gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 	@gsettings set org.gnome.desktop.wm.preferences audible-bell false
 	@gsettings set org.gnome.shell last-selected-power-profile 'performance'
 	@gsettings set org.gnome.desktop.search-providers disabled "['org.gnome.Software.desktop']"
@@ -178,18 +160,6 @@ $(SYS_ENV_RC) : $(USR_ENV_RC)
 	$(OKRULE)
 
 # ########################################################################################################
-# kitty                                                                                                  #
-# ########################################################################################################
-USER_KITTY_CONF := kitty/kitty.conf
-SYS_KITTY_CONF  := ~/.config/kitty/kitty.conf
-kitty : $(SYS_KITTY_CONF)
-
-$(SYS_KITTY_CONF) : $(USER_KITTY_CONF)
-	@mkdir -p $(dir $@) $(SILENT)
-	@cp -f $< $@ $(SILENT)
-	$(OKRULE)
-
-# ########################################################################################################
 # env                                                                                                    #
 # ########################################################################################################
 USER_ENV_CONF := systemd/user_env.conf
@@ -241,20 +211,6 @@ $(SYS_NVIM_LUA) : $(USR_NVIM_LUA)
 	$(OKRULE)
 
 # ########################################################################################################
-# hyprland                                                                                               #
-# ########################################################################################################
-SRC_HYPR_DIR := hyprland
-DES_HYPR_DIR := ~/.config/hypr
-SRC_HYPR_ALL := $(wildcard $(SRC_HYPR_DIR)/*)
-DES_HYPR_ALL := $(patsubst $(SRC_HYPR_DIR)/%,$(DES_HYPR_DIR)/%,$(SRC_HYPR_ALL))
-hyprland : $(DES_HYPR_ALL)
-
-$(DES_HYPR_DIR)/% : $(SRC_HYPR_DIR)/%
-	@mkdir -p $(dir $@) $(SILENT)
-	@cp -f $< $@ $(SILENT)
-	$(OKRULE)
-
-# ########################################################################################################
 # flameshot                                                                                              #
 # ########################################################################################################
 USER_FLAMESHOT_CONF = flameshot/flameshot.ini
@@ -262,20 +218,6 @@ SYS_FLAMESHOT_CONF = ~/.config/flameshot/flameshot.ini
 flameshot : $(SYS_FLAMESHOT_CONF)
 
 $(SYS_FLAMESHOT_CONF) : $(USER_FLAMESHOT_CONF)
-	@mkdir -p $(dir $@) $(SILENT)
-	@cp -f $< $@ $(SILENT)
-	$(OKRULE)
-
-# ########################################################################################################
-# waybar                                                                                                 #
-# ########################################################################################################
-SRC_WAYBAR_DIR := waybar
-DES_WAYBAR_DIR := ~/.config/waybar
-SRC_WAYBAR_ALL := $(wildcard $(SRC_WAYBAR_DIR)/*)
-DES_WAYBAR_ALL := $(patsubst $(SRC_WAYBAR_DIR)/%,$(DES_WAYBAR_DIR)/%,$(SRC_WAYBAR_ALL))
-waybar : $(DES_WAYBAR_ALL)
-
-$(DES_WAYBAR_DIR)/% : $(SRC_WAYBAR_DIR)/%
 	@mkdir -p $(dir $@) $(SILENT)
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
