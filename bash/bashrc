@@ -95,5 +95,6 @@ alias cdarchivos='cd /mnt/archivos'
 # ###################################################################################################
 # debian
 # ###################################################################################################
-alias update='sudo aptitude update'
-alias upgrade='sudo aptitude full-upgrade '
+#alias update='sudo aptitude update'
+#alias upgrade='sudo aptitude full-upgrade '
+

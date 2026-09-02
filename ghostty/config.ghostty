@@ -1,0 +1,48 @@
+font-family = "Lilex"
+font-family-bold = "Lilex Bold"
+font-family-italic = "Lilex Italic"
+font-family-bold-italic = "Lilex Bold Italic"
+font-size = 10
+
+background = 282c34
+foreground = bbc2cf
+
+palette = 0=#1c1f24
+palette = 1=#ff6c6b
+palette = 2=#98be65
+palette = 3=#ecbe7b
+palette = 4=#51afef
+palette = 5=#c678dd
+palette = 6=#4db5bd
+palette = 7=#5b6268
+
+palette = 8=#5b6268
+palette = 9=#da8548
+palette = 10=#98be65
+palette = 11=#ecbe7b
+palette = 12=#2257a0
+palette = 13=#a9a1e1
+palette = 14=#46d9ff
+palette = 15=#dfdfdf
+
+selection-foreground = 1e1e2e
+selection-background = 3d4451
+
+cursor-style = bar
+cursor-color = 51afef
+cursor-text = bbc2cf
+
+background-opacity = 0.95
+background-blur = true
+
+window-padding-x = 6
+window-padding-y = 6
+
+window-width = 160
+window-height = 50
+
+bell-features = no-system, no-audio, no-attention, no-title, no-border
+
+title = Terminal
+gtk-titlebar-style = tabs
+gtk-wide-tabs = true
