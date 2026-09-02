@@ -38,11 +38,10 @@ background-blur = true
 window-padding-x = 6
 window-padding-y = 6
 
-window-width = 160
+window-width = 170
 window-height = 50
 
 bell-features = no-system, no-audio, no-attention, no-title, no-border
 
 title = Terminal
-gtk-titlebar-style = tabs
-gtk-wide-tabs = true
+
