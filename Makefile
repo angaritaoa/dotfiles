@@ -125,7 +125,7 @@ SYS_BASH_RC        := ~/.bashrc
 bash : $(SYS_BASH_RC)
 
 $(SYS_BASH_RC) : $(USER_BASH_RC)
-#	@chsh -s /usr/bin/bash
+	@chsh -s /usr/bin/bash
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
 
