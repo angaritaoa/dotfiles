@@ -18,7 +18,8 @@ GRAY    := \e[90m
 # ########################################################################################################
 .ONESHELL :
 SILENT := >/dev/null 2>&1
-OKRULE = @printf "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)"
+OKRULE = @echo "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)"
+
 
 # ########################################################################################################
 # dotfiles                                                                                               #
@@ -51,7 +52,7 @@ kernel :
 	$(OKRULE)
 
 user :
-	#@sudo usermod -a -G input angaritaoa $(SILENT)
+	@sudo usermod -a -G input angaritaoa $(SILENT)
 	@xdg-user-dirs-update $(SILENT)
 	$(OKRULE)
 
@@ -116,7 +117,7 @@ terminal :
 	@gsettings set com.raggesilver.BlackBox context-aware-header-bar false
 	@gsettings set com.raggesilver.BlackBox cursor-blink-mode 0
 	@gsettings set com.raggesilver.BlackBox fill-tabs false
-	@gsettings set com.raggesilver.BlackBox font 'Lilex 11'
+	@gsettings set com.raggesilver.BlackBox font 'Lilex 10'
 	@gsettings set com.raggesilver.BlackBox notify-process-completion false
 	@gsettings set com.raggesilver.BlackBox remember-window-size true
 	@gsettings set com.raggesilver.BlackBox show-headerbar true
