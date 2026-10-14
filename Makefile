@@ -43,7 +43,8 @@ packages :
 	$(OKRULE)
 
 kernel :
-	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 xe.enable_psr=0 intel_idle.max_cstate=4 quiet"/' /etc/default/grub $(SILENT)
+	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.enable_psr=0 intel_idle.max_cstate=1 quiet"/' /etc/default/grub $(SILENT)
+#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 xe.enable_psr=0 intel_idle.max_cstate=1 quiet"/' /etc/default/grub $(SILENT)
 	@sudo grub-mkconfig -o /boot/grub/grub.cfg $(SILENT)
 	$(OKRULE)
 
