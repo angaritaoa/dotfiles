@@ -39,12 +39,12 @@ packages :
 		libva-intel-driver libva-utils intel-gpu-tools ripgrep fd rsync libinput-tools \
 		adwaita-fonts inotify-tools gnome-tweaks breeze-cursors dconf neovim flameshot ghostty \
 		papirus-icon-theme vivaldi vivaldi-ffmpeg-codecs obsidian ttf-jetbrains-mono \
-		ttf-nerd-fonts-symbols-mono
+		ttf-nerd-fonts-symbols-mono gnome-system-monitor
 	$(OKRULE)
 
 kernel :
-	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.enable_psr=0 intel_idle.max_cstate=1 quiet"/' /etc/default/grub $(SILENT)
-#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 xe.enable_psr=0 intel_idle.max_cstate=1 quiet"/' /etc/default/grub $(SILENT)
+	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=7d55 xe.force_probe=!7d55 intel_idle.max_cstate=1 i915.enable_psr=0 i915.enable_psr2_sel_fetch=0 i915.enable_panel_replay=0 i915.enable_fbc=0 i915.enable_guc=3 i915.enable_dc=0 quiet"/' /etc/default/grub $(SILENT)
+#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 intel_idle.max_cstate=1 xe.enable_psr=0 xe.enable_psr2_sel_fetch=0 xe.enable_panel_replay=0 xe.enable_fbc=0 xe.enable_dc=0 quiet"/' /etc/default/grub $(SILENT)
 	@sudo grub-mkconfig -o /boot/grub/grub.cfg $(SILENT)
 	$(OKRULE)
 
