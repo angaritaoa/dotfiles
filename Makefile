@@ -72,7 +72,7 @@ gnome :
 	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Light'
 	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 10'
-	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.66
+	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.55
 	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
 	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10'
 	@gsettings set org.gnome.desktop.wm.preferences button-layout 'menu:minimize,maximize,close'
