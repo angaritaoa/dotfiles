@@ -23,110 +23,18 @@ OKRULE = @printf "[ $(GREEN)OK$(RESET) ] $(GRAY)$(notdir $@)$(RESET)\n"
 # ########################################################################################################
 # dotfiles                                                                                               #
 # ########################################################################################################
-RULESDOT := fontconfig bash profile env git flameshot nvim pacman ghostty
+RULESDOT := zsh profile env git
 .PHONY : dotfiles $(RULESDOT)
 dotfiles : $(RULESDOT)
 
 # ########################################################################################################
-# linux                                                                                                  #
-# ########################################################################################################
-RULESLIN := packages kernel user systemd fonts gnome gdm nautilus
-.PHONY : linux $(RULESLIN)
-linux : $(RULESLIN)
-
-packages :
-	@sudo pacman -Syu ffmpeg mesa mesa-utils git git-lfs tree 7zip bash-completion intel-npu-driver \
-		libva-intel-driver libva-utils intel-gpu-tools ripgrep fd rsync libinput-tools \
-		adwaita-fonts inotify-tools gnome-tweaks breeze-cursors dconf neovim flameshot ghostty \
-		papirus-icon-theme vivaldi vivaldi-ffmpeg-codecs obsidian ttf-jetbrains-mono \
-		ttf-nerd-fonts-symbols-mono gnome-system-monitor
-	$(OKRULE)
-
-kernel :
-	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 intel_idle.max_cstate=1 xe.enable_psr=0 xe.enable_psr2_sel_fetch=0 xe.enable_panel_replay=0 xe.enable_fbc=0 xe.enable_dc=0 quiet"/' /etc/default/grub $(SILENT)
-#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=7d55 xe.force_probe=!7d55 intel_idle.max_cstate=1 i915.enable_psr=0 i915.enable_psr2_sel_fetch=0 i915.enable_panel_replay=0 i915.enable_fbc=0 i915.enable_guc=3 i915.enable_dc=0 quiet"/' /etc/default/grub $(SILENT)
-	@sudo grub-mkconfig -o /boot/grub/grub.cfg $(SILENT)
-	$(OKRULE)
-
-user :
-	@sudo usermod -a -G input angaritaoa $(SILENT)
-	$(OKRULE)
-
-systemd :
-	@systemctl --user enable --now ssh-agent.socket $(SILENT)
-	$(OKRULE)
-
-fonts :
-	@sudo cp -fR /mnt/archivos/config/fonts/Lilex /usr/share/fonts $(SILENT)
-	@sudo fc-cache -r $(SILENT)
-	$(OKRULE)
-
-gnome :
-	@gsettings set org.gnome.desktop.interface clock-format '12h'
-	@gsettings set org.gnome.desktop.interface cursor-blink true
-	@gsettings set org.gnome.desktop.interface document-font-name 'Adwaita Sans 10'
-	@gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
-	@gsettings set org.gnome.desktop.interface font-hinting 'slight'
-	@gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 10'
-	@gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
-	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
-	@gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Light'
-	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 10'
-	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.55
-	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
-	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10'
-	@gsettings set org.gnome.desktop.wm.preferences button-layout 'menu:minimize,maximize,close'
-	@gsettings set org.gnome.desktop.interface enable-animations true
-	@gsettings set org.gnome.desktop.interface clock-show-date true
-	@gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
-	@gsettings set org.gnome.desktop.peripherals.mouse speed 0.0
-	@gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
-	@gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-	@gsettings set org.gnome.desktop.interface cursor-size 32
-	@gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
-	@gsettings set org.gnome.desktop.wm.preferences audible-bell false
-	@gsettings set org.gnome.shell last-selected-power-profile 'performance'
-	@gsettings set org.gnome.desktop.search-providers disabled "['org.gnome.Software.desktop']"
-	@gsettings set org.gnome.desktop.input-sources mru-sources "[('xkb', 'us')]"
-	@gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+altgr-intl')]"
-	@gsettings set org.gnome.desktop.calendar week-start-day 'monday'
-	@gsettings set org.gnome.desktop.interface clock-show-weekday true
-	@gsettings set org.gnome.desktop.calendar show-weekdate true
-	$(OKRULE)
-
-gdm :
-	@sudo mkdir -p /etc/dconf/db/gdm.d $(SILENT)
-	@sudo mkdir -p /etc/dconf/profile $(SILENT)
-	@sudo cp -f $(shell pwd)/gdm/scaling /etc/dconf/db/gdm.d $(SILENT)
-	@sudo cp -f $(shell pwd)/gdm/gdm /etc/dconf/profile $(SILENT)
-	@sudo dconf update $(SILENT)
-	$(OKRULE)
-
-nautilus :
-	@gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
-	@gsettings set org.gnome.nautilus.preferences click-policy 'single'
-	$(OKRULE)
-
-# ########################################################################################################
-# fontconfig                                                                                             #
-# ########################################################################################################
-USER_FONT_CONF     := fontconfig/local.conf
-SYS_FONT_CONF      := /etc/fonts/local.conf
-fontconfig : $(SYS_FONT_CONF)
-
-$(SYS_FONT_CONF) : $(USER_FONT_CONF)
-	@sudo cp -f $< $@ $(SILENT)
-	$(OKRULE)
-
-# ########################################################################################################
-# bash                                                                                                   #
+# zsh                                                                                                    #
 # ########################################################################################################
 USER_BASH_RC       := bash/bashrc
 SYS_BASH_RC        := ~/.bashrc
 bash : $(SYS_BASH_RC)
 
 $(SYS_BASH_RC) : $(USER_BASH_RC)
-	@chsh -s /usr/bin/bash
 	@cp -f $< $@ $(SILENT)
 	$(OKRULE)
 

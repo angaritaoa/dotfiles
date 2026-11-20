@@ -39,11 +39,12 @@ packages :
 		libva-intel-driver libva-utils intel-gpu-tools ripgrep fd rsync libinput-tools \
 		adwaita-fonts inotify-tools gnome-tweaks breeze-cursors dconf neovim flameshot ghostty \
 		papirus-icon-theme vivaldi vivaldi-ffmpeg-codecs obsidian ttf-jetbrains-mono \
-		ttf-nerd-fonts-symbols-mono
+		ttf-nerd-fonts-symbols-mono gnome-system-monitor
 	$(OKRULE)
 
 kernel :
-	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=7d55 i915.enable_psr=0 xe.force_probe=!7d55 xe.enable_psr=0 quiet"/' /etc/default/grub $(SILENT)
+	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=!7d55 xe.force_probe=7d55 intel_idle.max_cstate=1 xe.enable_psr=0 xe.enable_psr2_sel_fetch=0 xe.enable_panel_replay=0 xe.enable_fbc=0 xe.enable_dc=0 quiet"/' /etc/default/grub $(SILENT)
+#	@sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="video=DP-2:d i915.force_probe=7d55 xe.force_probe=!7d55 intel_idle.max_cstate=1 i915.enable_psr=0 i915.enable_psr2_sel_fetch=0 i915.enable_panel_replay=0 i915.enable_fbc=0 i915.enable_guc=3 i915.enable_dc=0 quiet"/' /etc/default/grub $(SILENT)
 	@sudo grub-mkconfig -o /boot/grub/grub.cfg $(SILENT)
 	$(OKRULE)
 
@@ -71,7 +72,7 @@ gnome :
 	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Light'
 	@gsettings set org.gnome.desktop.interface monospace-font-name 'Lilex 10'
-	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+	@gsettings set org.gnome.desktop.interface text-scaling-factor 1.55
 	@gsettings set org.gnome.desktop.interface toolkit-accessibility false
 	@gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Adwaita Sans 10'
 	@gsettings set org.gnome.desktop.wm.preferences button-layout 'menu:minimize,maximize,close'
